@@ -1,0 +1,25 @@
+.dropright .dropdown-menu.show{
+    background: none;
+    padding: 2px;
+    border: none;
+}
+.dropdown-menu {
+    width: 300px !important;
+}
+.dropright .dropdown-menu {
+    top: 1px;
+    right: auto;
+    left: 100%;
+    margin-top: -2px;
+    margin-left: 1.125rem;
+}
+
+.pagination{
+    padding: 20px 16px;
+    float: right;
+    font-size: 15px;
+
+}
+html, body{
+    font-size: 12PX;
+}
