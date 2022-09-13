@@ -9,12 +9,19 @@ import { EmployeeService } from './shared/employee.service';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
-  employeeData: Employees[] = [];
+  employees: Employees[] = [];
    //filter
    searchText:any;
    //pagination
    totalLength:any;
    page:number = 1;
+   pageSize:number =5;
+    // sorting
+    key: string = 'id';
+    reverse: boolean = false;
+
+    msg: string = '';
+    clss: string = '';
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
@@ -22,7 +29,7 @@ export class EmployeesComponent implements OnInit {
   }
   getEmployee() {
     this.employeeService.getEmployee().subscribe((data) => {
-      this.employeeData = data;
+      this.employees = data;
     });
   }
   deleteEmployee(row : any){
@@ -30,19 +37,47 @@ export class EmployeesComponent implements OnInit {
     if (confirm("Are you sure to delete ?")){
     this.employeeService.delete(row.id)
     .subscribe(res => { 
-     
-    })
-    // No need to Refresh
-    this.getEmployee();
+      const index: number = this.employees.indexOf(row);
+      if (index !== -1) {
+          this.employees.splice(index, 1);
+      }    
+    });
    }
   }
-  // search(){
-  //   if (this.name == ""){
-  //     this.ngOnInit();
-  //   }else{
-  //     this.employeeData = this.employeeData.filter(res =>{
-  //       return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
-  //     })
-  //   }
-  // }
+    //sorting
+    sort(key){
+      this.key = key;
+      this.reverse = !this.reverse;
+   }
+
+  // Multiple delete
+  checkAllCheckBox(ev: any) {
+		this.employees.forEach(x => x.checked = ev.target.checked)
+	}
+  isAllCheckBoxChecked() {
+		return this.employees.every(row => row.checked);
+	}
+  deleteEmployees(): void {
+		const selectedEmployees= this.employees.
+    filter(employee => employee.checked).map(row => row.id);
+	
+		if(selectedEmployees && selectedEmployees.length > 0) {
+		
+			selectedEmployees.forEach(id => {
+				this.employeeService.deleteEmployees(id)
+				.subscribe(res => {
+					this.clss = 'grn';
+					this.msg = 'employees successfully deleted';
+					}, err => {
+            this.clss = 'rd';
+						this.msg = 'Something went wrong during deleting employee';
+                    }
+                );
+		});		
+		} else {
+			this.clss = 'rd';
+			this.msg = 'You must select at least one employee';
+		}
+		this.getEmployee();
+	}
 }

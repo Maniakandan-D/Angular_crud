@@ -16,6 +16,20 @@ import { FormsModule } from '@angular/forms';
 import { EmployeeViewComponent } from './component/employees/employee-view/employee-view.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DesignationComponent } from './component/designation/designation.component';
+import { StatusComponent } from './component/status/status.component';
+import { DepartmentModule } from './component/department/module/department.module';
+import { DesignationModule } from './component/designation/module/designation.module';
+import { DepartmentAddComponent } from './component/department/department-add/department-add.component';
+import { DesignationAddComponent } from './component/designation/designation-add/designation-add.component';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { StatusViewComponent } from './component/status/status-view/status-view.component';
+import { DepartmentViewComponent } from './component/department/department-view/department-view.component';
+import { DesignationViewComponent } from './component/designation/designation-view/designation-view.component';
+import { StatusAddComponent } from './component/status/status-add/status-add.component';
+import { StatusModule } from './component/status/module/status.module';
+
+
 
 
 @NgModule({
@@ -28,7 +42,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DepartmentComponent,
     EmployeeEditComponent,
     EmployeeAddComponent,
-    EmployeeViewComponent
+    EmployeeViewComponent,
+    DesignationComponent,
+    StatusComponent,
+    DesignationAddComponent,
+    DepartmentAddComponent,
+    StatusViewComponent,
+    DepartmentViewComponent,
+    DesignationViewComponent,
+    StatusAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +59,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     FormsModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    DepartmentModule,
+    DesignationModule,
+    StatusModule,
+    Ng2OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

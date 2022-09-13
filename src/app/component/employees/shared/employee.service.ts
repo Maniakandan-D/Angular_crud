@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
-import{ HttpClient } from '@angular/common/http';
+import{ HttpClient, HttpHeaders } from '@angular/common/http';
 import { Employees } from './employee.model';
 import { map } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
+  productUrl ='http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
@@ -18,18 +23,24 @@ export class EmployeeService {
   addEmployee(data: Employees) {
     return this.http.post<Employees>('http://localhost:3000/Employees', data);
   }
-  getEmployeeById(id: number) {
+  getEmployeeById(id: string) {
     return this.http.get<Employees>(`http://localhost:3000/Employees/${id}`);
    }
    update(data: Employees){
     return this.http.put(`http://localhost:3000/Employees/${data.id}`,data);
    }
-   delete(id:number){
+   delete(id:string){
     return this.http.delete<Employees>(`http://localhost:3000/Employees/${id}`).pipe(map((res: any ) =>{
       return res
     }));
  }
- getDetails(id: number){
+ getDetails(id: string){
   return this.http.get<Employees>(`http://localhost:3000/Employees/${id}`);
  }
+ //MultipleDelete
+ deleteEmployees(id : string){
+  return this.http.delete<any>(`http://localhost:3000/Employees/${id}`).pipe(map((res: any ) =>{
+    return res
+  }));
+}
 }

@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./employee-view.component.css']
 })
 export class EmployeeViewComponent implements OnInit {
- id: 0;
+ id: string;
  employees: Employees;
   constructor(private route: ActivatedRoute, private employeeService: EmployeeService, private router: Router) { }
 

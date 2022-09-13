@@ -10,14 +10,15 @@ import { EmployeeService } from '../shared/employee.service';
 })
 export class EmployeeEditComponent implements OnInit {
   employeeForm: Employees ={
-    id:0,
+    id: '',
+    empCode: '',
     name :'',
     email : '',
     designation :'',
     department :'',
     date :[''],
     status :'',
-    salary :['']
+    salary :[''],
 };
 
   constructor(private route: ActivatedRoute,
@@ -26,11 +27,11 @@ export class EmployeeEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((param) => {
-      var id = Number(param.get('id'));
+      var id = String(param.get('id'));
       this.getEmployeeById(id);
     });
   }
-  getEmployeeById(id: number) {
+  getEmployeeById(id: string) {
     this.employeeService.getEmployeeById(id).subscribe((data) => {
       this.employeeForm = data;
     });

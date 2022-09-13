@@ -1,0 +1,28 @@
+
+  <legend>Designation Details</legend>
+  <form #designationForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="txtEmpCode" class="form-label">Emp Code</label>
+          <input type="text"  class="form-control" minlength="6" name="empCode" [(ngModel)]="designForm.empCode"  id="txtEmpCode" autocomplete="off" required #empCode="ngModel"  ngModel/>
+          <span *ngIf="empCode.invalid && empCode.touched" class="errormessage"> EmpCode is Required</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label for="txtDesignation" class="form-label">Designation</label>
+          <select name="designation" [(ngModel)] = "designForm.designation" class="form-control" id="txtDesignation" autocomplete="off" required #designation="ngModel"  ngModel>
+            <option>Software Developer</option>
+            <option>Software Architect</option>
+            <option>Network Engineer</option>
+            <option>HR</option>
+            <option>Finance</option>
+          </select>
+          <span *ngIf="designation.invalid && designation.touched" class="errormessage"> Designation is Required</span>
+        </div>
+      </div>
+    </div>
+    <button [disabled]="designationForm.invalid" type="submit" (click)="addDesignation()" class="btn btn-primary">Add</button>
+    <button type="button" (click)="back()" class="btn btn-secondary mx-4">Back</button>
+  </form>

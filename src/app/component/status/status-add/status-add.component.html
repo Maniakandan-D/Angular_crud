@@ -1,0 +1,24 @@
+<legend>Status Details</legend>
+<form #statusForm="ngForm">
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="txtEmpCode" class="form-label">Emp Code</label>
+        <input type="text"  class="form-control" minlength="4" name="empCode" [(ngModel)]="myForm.empCode"  id="txtEmpCode" autocomplete="off" required #empCode="ngModel"  ngModel/>
+        <span *ngIf="empCode.invalid && empCode.touched" class="errormessage"> Emp Code is Required</span>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3">
+          <label for="txtStatus" class="form-label">Status</label>
+          <select name="status" [(ngModel)] = "myForm.status" class="form-control" id="txtStatus" autocomplete="off" required #status="ngModel"  ngModel>
+            <option>Confirmed</option>
+            <option>Probation</option>
+          </select>
+          <span *ngIf="status.invalid && status.touched" class="errormessage"> Status is Required</span>
+        </div>
+    </div>
+  </div>
+  <button [disabled]="statusForm.invalid" type="submit" (click)="addStatus()" class="btn btn-primary">Add</button>
+  <button type="button" (click)="back()" class="btn btn-secondary mx-4">Back</button>
+</form>

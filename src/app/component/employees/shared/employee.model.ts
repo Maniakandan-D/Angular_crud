@@ -1,5 +1,6 @@
 export class Employees{
-    id: number= 0;
+    id: string= '';
+    empCode: string = '';
     name: string = '';
     email: string = '';
     designation: string = '';
@@ -7,5 +8,5 @@ export class Employees{
     date: any;
     status: string = '';
     salary: any;
-    
+    checked?: boolean;
 }
