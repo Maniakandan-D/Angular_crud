@@ -1,0 +1,101 @@
+<h3 style="padding-bottom: 40px; padding-top: 20px;">Employee Table</h3>
+<div *ngIf="employees && employees.length > 0; else elseBlock">
+  
+  <nav class="navbar navbar-expand-lg navbar-light mt-2">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown mx-3">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Action
+              </a>
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" (click)="deleteEmployees()">Delete</a>
+              </div>
+          </li>
+          <li class="nav-item btn-group dropright">
+              <button type="button" class="btn btn-secondary" data-toggle="dropdown">
+                  <i class="fa fa-filter" aria-hidden="true"></i> Filter
+              </button>
+              <div class="dropdown-menu">
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" name="search" [(ngModel)]="searchText"  placeholder="Search" aria-label="Search" autocomplete="off"/>
+                  <button class="btn btn-outline-success my-2 my-sm-0"  type="button"><i class="fa fa-search"></i></button>
+                </form>
+              </div>
+          </li>
+        </ul>
+        <ul>
+          <div *ngIf="msg" [ngClass]="clss">{{msg}}</div>
+        </ul>
+        <ul class="navbar nav ml-auto">
+          <li class="nav-item">
+              <button type="button" class="btn btn-success" routerLink="/employees/emplyee-add"><i class="fas fa-plus"></i> Add</button>
+          </li>
+          <li class="nav-item btn-group">
+              <button type="button" class="btn btn-info dropdown-toggle mx-3" data-toggle="dropdown" aria-expanded="false">
+                  Export
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Login</a>
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+  </nav>
+  <table class="table mt-3">
+      <thead>
+        <tr>
+          <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
+          <th (click)="sort('empCode')" scope="col">Emp Code <i class="fas fa-sort"></i></th>
+          <th (click)="sort('name')"  scope="col">Name <i class="fas fa-sort"></i></th>
+          <th (click)="sort('email')" scope="col">E-mail <i class="fas fa-sort"></i></th>
+          <th (click)="sort('designation')" scope="col">Designation <i class="fas fa-sort"></i></th>
+          <th (click)="sort('department')" scope="col">Department <i class="fas fa-sort"></i></th>
+          <th (click)="sort('date')" scope="col">DOJ <i class="fas fa-sort"></i></th>
+          <th (click)="sort('status')" scope="col">Status <i class="fas fa-sort"></i></th>
+          <th (click)="sort('salary')" scope="col">Salary <i class="fas fa-sort"></i></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of employees |orderBy: key: reverse | filter: searchText | paginate:{itemsPerPage:pageSize,currentPage:page,totalItems:totalLength}; let i=index; let odd = odd"  [ngClass]="odd ? 'odd_col' : 'even_col'">
+          <td><input type="checkbox" value="{{row.id}}" [(ngModel)]="employees[i].checked"></td>
+          <td>{{row.empCode}}</td>
+          <td>{{row.name}}</td>
+          <td>{{row.email}}</td>
+          <td>{{row.designation}}</td>
+          <td>{{row.department}}</td>
+          <td>{{row.date}}</td>
+          <td>{{row.status}}</td>
+          <td>{{row.salary}}</td>
+          <td>
+            <a [routerLink]="['/employees/employee-view', row.id]" class="mx-1"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+            <a [routerLink]="['/employees/employee-edit', row.id]" class="mx-1"><i class="fas fa-pencil-alt"></i></a>
+            <a (click)="deleteEmployee(row)" class="mx-1"><i class="fas fa-trash"></i></a>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+<ng-template #elseBlock><div style="color: red;">No record found</div></ng-template>
+ 
+ <!-- pagination -->
+<div class="pagination">
+    <div class="col-md-offset-11 ml-auto">
+      <label>Select Page</label>
+      <select id="PerPage" class="form-control" [(ngModel)]="pageSize">
+          <option [ngValue]="5">5</option>
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="25">25</option>
+          <option [ngValue]="50">50</option>
+          <option [ngValue]="100">100</option>
+      </select>
+    </div>
+    <pagination-controls (pageChange)="page=$event"></pagination-controls>
+</div>

@@ -1,0 +1,62 @@
+
+    <legend>Edit</legend>
+    <form #empFrom="ngForm">
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label for="txtName" class="form-label">Name</label>
+            <input type="text"  class="form-control" minlength="4" name="name" [(ngModel)]="employeeForm.name"  id="txtName" autocomplete="off" required #name="ngModel"  ngModel/>
+            <span *ngIf="name.invalid && name.touched" class="errormessage"> Name is Required</span>
+          </div>
+          <div class="mb-3">
+            <label for="txtemail" class="form-label">E-mail</label>
+            <input type="email" name="email" [(ngModel)] = "employeeForm.email" class="form-control" id="txtEmail" autocomplete="off" required  #email="ngModel"  ngModel/>
+            <span *ngIf="email.invalid && email.touched" class="errormessage"> E-mail is Required</span>
+          </div>
+          <div class="mb-3">
+            <label for="txtDesignation" class="form-label">Designation</label>
+            <select name="designation" [(ngModel)] = "employeeForm.designation" class="form-control" id="txtDesignation" autocomplete="off" required #designation="ngModel"  ngModel>
+              <option>Software Developer</option>
+              <option>Software Architect</option>
+              <option>Network Engineer</option>
+              <option>HR</option>
+              <option>Finance</option>
+            </select>
+            <span *ngIf="designation.invalid && designation.touched" class="errormessage"> Designation is Required</span>
+          </div>
+          <div class="mb-3">
+            <label for="txtDepartment" class="form-label">Department</label>
+            <select name="department" [(ngModel)] = "employeeForm.department" class="form-control" id="txtDepartment" autocomplete="off" required #department="ngModel"  ngModel>
+              <option>Software</option>
+              <option>IT</option>
+              <option>Network</option>
+              <option>Finance</option>
+              <option>HR</option>
+            </select>
+            <span *ngIf="department.invalid && department.touched" class="errormessage">Department is Required</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label for="txtDate" class="form-label">Date of Joining</label>
+            <input type="date" name="date" [(ngModel)] = "employeeForm.date" class="form-control" id="txtDate" autocomplete="off"  required  #date="ngModel"  ngModel/>
+            <span *ngIf="date.invalid && date.touched" class="errormessage"> Date of Joining is Required</span>
+          </div>
+          <div class="mb-3">
+            <label for="txtStatus" class="form-label">Status</label>
+            <select name="status" [(ngModel)] = "employeeForm.status" class="form-control" id="txtStatus" autocomplete="off" required #status="ngModel"  ngModel>
+              <option>Confirmed</option>
+              <option>Probation</option>
+            </select>
+            <span *ngIf="status.invalid && status.touched" class="errormessage"> Status is Required</span>
+          </div>
+          <div class="mb-3">
+            <label for="txtSalary" class="form-label">Salary</label>
+            <input type="text" name="salary" [(ngModel)] = "employeeForm.salary" class="form-control" id="txtSalary" autocomplete="off" required  #salary="ngModel"  ngModel/>
+            <span *ngIf="salary.invalid && salary.touched" class="errormessage"> Salary is Required</span>
+          </div>
+        </div>
+      </div>
+      <button [disabled]="empFrom.invalid" type="submit" (click)="update()" class="btn btn-primary">Update</button>
+      <button type="button" (click)="cancel()" class="btn btn-secondary mx-4">Cancel</button>
+    </form>

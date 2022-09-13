@@ -1,0 +1,119 @@
+<h3 style="padding-bottom: 40px; padding-top: 20px;">Department Table</h3>
+<div *ngIf="departmentData && departmentData.length > 0; else elseBlock">
+  <div *ngIf="msg" [ngClass]="clss">{{msg}}</div>
+  <nav class="navbar navbar-expand-lg navbar-light mt-2">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown mx-3">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                Action
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" (click)="deleteEmployees()">Delate</a>
+            </div>
+        </li>
+        <li class="nav-item btn-group dropright">
+            <button type="button" class="btn btn-secondary" data-toggle="dropdown">
+                <i class="fa fa-filter" aria-hidden="true"></i> Filter
+            </button>
+            <div class="dropdown-menu">
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" name="search" [(ngModel)]="searchText"  placeholder="Search" aria-label="Search" autocomplete="off"/>
+                <button class="btn btn-outline-success my-2 my-sm-0"  type="button"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+        </li>
+      </ul>
+      <ul class="navbar nav ml-auto">
+        <li class="nav-item">
+            <button type="button" class="btn btn-success" routerLink="/department/department-add"><i class="fas fa-plus"></i> Add</button>
+        </li>
+        <li class="nav-item btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle mx-3" data-toggle="dropdown" aria-expanded="false">
+                Export
+           </button>
+           <div class="dropdown-menu">
+               <a class="dropdown-item" href="#">Login</a>
+               <a class="dropdown-item" href="#">Profile</a>
+               <a class="dropdown-item" href="#">Logout</a>
+           </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
+        <th (click)="sort('empCode')" scope="col-2">Emp Code <i class="fas fa-sort"></i></th>
+        <th (click)="sort('department')" scope="col-4">Department <i class="fas fa-sort"></i></th>
+        <th scope="col-2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of departmentData |orderBy: key: reverse | filter: searchText | paginate:{itemsPerPage:pageSize,currentPage:page,totalItems:totalLength}; let i=index; let odd = odd"  [ngClass]="odd ? 'odd_col' : 'even_col'">
+        <td><input type="checkbox" value="{{row.id}}" [(ngModel)]="departmentData[i].checked"></td>
+        <td>
+          <div *ngIf="row.isEdit">
+            <input type="text" [(ngModel)]="row.empCode" class="form-control"/>
+          </div>
+          <div *ngIf="!row.isEdit">
+            {{row.empCode}}
+          </div> 
+        </td>
+        <td>
+          <div *ngIf="row.isEdit">
+            <input type="text" [(ngModel)]="row.department" class="form-control"/>
+          </div>
+          <div *ngIf="!row.isEdit">
+            {{row.department}}
+          </div> 
+        </td>
+        <td>
+          <div class="row">
+            <div class="col-2">
+              <div  *ngIf="!row.isEdit">
+                <a [routerLink]="['/department/department-view', row.id]" class="mx-1"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+            <div class="col-2">
+              <div *ngIf="row.isEdit" style="width:500px;" id="container">
+                  <a class="mx-2" (click)="row.isEdit = false"><button class="btn btn-success">Update</button></a> 
+                  <a class="mx-2" (click)="row.isEdit = false"><button class="btn btn-danger">Cancel</button></a> 
+              </div>
+              <div *ngIf="!row.isEdit">
+                <a class="mx-2" (click)="onEdit(row)"><i class="fas fa-pencil-alt"></i></a> 
+              </div>
+            </div>
+            <div class="col-2">
+              <div *ngIf="!row.isEdit">
+                <a (click)="deleteDepartment(row)" class="mx-1"><i class="fas fa-trash"></i></a>
+              </div>
+            </div>
+          </div>
+         </td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+<ng-template #elseBlock><div style="color: red;">No record found</div></ng-template>
+
+<!-- pagination -->
+<div class="pagination">
+  <div class="col-md-offset-11 ml-auto">
+    <label>Select Page</label>
+    <select id="PerPage" class="form-control" [(ngModel)]="pageSize">
+        <option [ngValue]="5">5</option>
+        <option [ngValue]="10">10</option>
+        <option [ngValue]="25">25</option>
+        <option [ngValue]="50">50</option>
+        <option [ngValue]="100">100</option>
+    </select>
+  </div>
+  <pagination-controls (pageChange)="page=$event"></pagination-controls>
+</div>

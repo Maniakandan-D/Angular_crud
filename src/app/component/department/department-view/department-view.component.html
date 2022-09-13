@@ -1,0 +1,13 @@
+
+    <h2> Department Details </h2>
+
+    <hr/>
+    <div *ngIf="departments">
+        <div>
+            <label><b>Emp Code:  </b></label> {{departments.empCode}}
+        </div>
+        <div>
+            <label><b>Department:  </b></label>{{departments.department}}
+        </div>
+    </div>
+    <button (click)="list()" class="btn btn-secondary">Back</button>
