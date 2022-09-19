@@ -9,7 +9,10 @@ import { EmployeeService } from '../shared/employee.service';
   styleUrls: ['./employee-edit.component.css']
 })
 export class EmployeeEditComponent implements OnInit {
+<<<<<<< HEAD
   alert: boolean;
+=======
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   employeeForm: Employees ={
     id: '',
     empCode: '',
@@ -19,7 +22,11 @@ export class EmployeeEditComponent implements OnInit {
     department :'',
     date :[''],
     status :'',
+<<<<<<< HEAD
     salary :['']
+=======
+    salary :[''],
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 };
 
   constructor(private route: ActivatedRoute,
@@ -41,6 +48,7 @@ export class EmployeeEditComponent implements OnInit {
     this.employeeService.update(this.employeeForm)
     .subscribe({
       next:(data) => {
+<<<<<<< HEAD
         
        //direct to employees
         this.router.navigate(["/employees"]);
@@ -49,13 +57,23 @@ export class EmployeeEditComponent implements OnInit {
       error:(err) => {
         console.log(err);
         this.alert =true;
+=======
+       //direct to employees
+        this.router.navigate(["/employees"]);
+      },
+      error:(err) => {
+        console.log(err);
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
       }
     })
   }
   cancel(){
     this.router.navigate(['/employees']);
    }
+<<<<<<< HEAD
      closeAlert(){
     this.alert = false;
   }
+=======
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 }

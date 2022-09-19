@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 import { DepartmentAddComponent } from './department-add.component';
 
 describe('DepartmentAddComponent', () => {

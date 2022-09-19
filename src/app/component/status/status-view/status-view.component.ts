@@ -18,15 +18,27 @@ export class StatusViewComponent implements OnInit {
     this.Status = new Status();
     this.id = this.route.snapshot.params['id'];
 
+<<<<<<< HEAD
     this.statusService.getStatusDetails(this.id)
+=======
+    this.statusService.getDetails(this.id)
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
     .subscribe(data => {
       this.Status= data;
     }, error => console.log(error));
   }
+<<<<<<< HEAD
   statusDetails(id: string){
     this.router.navigate(['status/status-view', id])
    }
    list(){
     this.router.navigate(['/status']);
+=======
+  departmentDetails(id: string){
+    this.router.navigate(['department/department-view', id])
+   }
+   list(){
+    this.router.navigate(['/department']);
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
    }
   }

@@ -1,5 +1,10 @@
 <h3 style="padding-bottom: 40px; padding-top: 20px;">Designation Table</h3>
+<<<<<<< HEAD
 <div *ngIf="designationData && designationData.length > 0">
+=======
+<div *ngIf="designationData && designationData.length > 0; else elseBlock">
+  <div *ngIf="msg" [ngClass]="clss">{{msg}}</div>
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   <nav class="navbar navbar-expand-lg navbar-light mt-2">
     <a class="navbar-brand" href="#"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +17,11 @@
                 Action
             </a>
             <div class="dropdown-menu">
+<<<<<<< HEAD
                 <a class="dropdown-item" (click)="deleteMultiDesignation()">Delate</a>
+=======
+                <a class="dropdown-item" (click)="deleteEmployees()">Delate</a>
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
             </div>
         </li>
         <li class="nav-item btn-group dropright">
@@ -27,9 +36,12 @@
             </div>
         </li>
       </ul>
+<<<<<<< HEAD
       <ul>
         <div *ngIf="msg" [ngClass]="clss">{{msg}}</div>
       </ul>
+=======
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
       <ul class="navbar nav ml-auto">
         <li class="nav-item">
             <button type="button" class="btn btn-success" routerLink="/designation/designation-add"><i class="fas fa-plus"></i> Add</button>
@@ -39,6 +51,11 @@
                 Export
            </button>
            <div class="dropdown-menu">
+<<<<<<< HEAD
+=======
+               <a class="dropdown-item" href="#">Login</a>
+               <a class="dropdown-item" href="#">Profile</a>
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
                <a class="dropdown-item" href="#">Logout</a>
            </div>
         </li>
@@ -50,12 +67,17 @@
     <thead>
       <tr>
         <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
+<<<<<<< HEAD
         <th (click)="sort('designationCode')"scope="col-2">Designation Code <i class="fas fa-sort"></i></th>
+=======
+        <th (click)="sort('empCode')"scope="col-2">Emp Code <i class="fas fa-sort"></i></th>
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
         <th (click)="sort('designation')" scope="col-4">Designation <i class="fas fa-sort"></i></th>
         <th scope="col-2"></th>
       </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
       <tr *ngFor="let row of designationData |orderBy: key: reverse  | filter: searchText | paginate:{itemsPerPage:pageSize,currentPage:page,totalItems:totalLength}; let i=index; let odd = odd"  [ngClass]="odd ? 'odd_col' : 'even_col'">
         <td><input type="checkbox" value="{{row.id}}" [(ngModel)]="designationData[i].checked"></td>
         <td>
@@ -64,6 +86,16 @@
           </div>
           <div *ngIf="!row.isEdit">
             {{row.designationCode}}
+=======
+      <tr *ngFor="let row of designationData | filter: searchText | paginate:{itemsPerPage:pageSize,currentPage:page,totalItems:totalLength}; let i=index; let odd = odd"  [ngClass]="odd ? 'odd_col' : 'even_col'">
+        <td><input type="checkbox" value="{{row.id}}" [(ngModel)]="designationData[i].checked"></td>
+        <td>
+          <div *ngIf="row.isEdit">
+            <input type="email" [(ngModel)]="row.empCode" class="form-control"/>
+          </div>
+          <div *ngIf="!row.isEdit">
+            {{row.empCode}}
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
           </div> 
         </td>
         <td>
@@ -101,12 +133,21 @@
     </tbody>
   </table>
 </div>
+<<<<<<< HEAD
 
 
 <!-- pagination -->
 <div class="pagination">
   <label class="col-md ml-auto">Select Page</label>
   <div class="col-md-offset-11 ml-auto">
+=======
+<ng-template #elseBlock><div style="color: red;">No record found</div></ng-template>
+
+<!-- pagination -->
+<div class="pagination">
+  <div class="col-md-offset-11 ml-auto">
+    <label>Select Page</label>
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
     <select id="PerPage" class="form-control" [(ngModel)]="pageSize">
         <option [ngValue]="5">5</option>
         <option [ngValue]="10">10</option>

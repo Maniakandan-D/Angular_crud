@@ -19,7 +19,11 @@ export class DesignationComponent implements OnInit {
    // sorting
   key: string = 'id';
   reverse: boolean = false;
+<<<<<<< HEAD
 // MultiDelete
+=======
+
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   msg: string = '';
   clss: string = '';
 
@@ -36,12 +40,20 @@ export class DesignationComponent implements OnInit {
   deleteDesignation(row : any){
     // add confirmation before deleting 
     if (confirm("Are you sure to delete ?")){
+<<<<<<< HEAD
     this.designationService.deleteDesignation(row.id)
     .subscribe(res => { 
       const index: number = this.designationData.indexOf(row);
       if (index !== -1) {
           this.designationData.splice(index, 1)
           alert("Designation delete successfully");
+=======
+    this.designationService.delete(row.id)
+    .subscribe(res => { 
+      const index: number = this.designationData.indexOf(row);
+      if (index !== -1) {
+          this.designationData.splice(index, 1);
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
       }    
     });
    }
@@ -65,6 +77,7 @@ export class DesignationComponent implements OnInit {
 isAllCheckBoxChecked() {
   return this.designationData.every(row => row.checked);
 }
+<<<<<<< HEAD
 deleteMultiDesignation(): void {
   const selectedDesignation= this.designationData.
   filter(employee => employee.checked).map(row => row.id);
@@ -80,11 +93,32 @@ deleteMultiDesignation(): void {
             this.clss = 'rd';
           this.msg = 'Something went wrong during deleting designation';
          }
+=======
+deleteEmployees(): void {
+  const selectedEmployees= this.designationData.
+  filter(employee => employee.checked).map(row => row.id);
+
+  if(selectedEmployees && selectedEmployees.length > 0) {
+  
+    selectedEmployees.forEach(id => {
+      this.designationService.deleteEmployees(id)
+      .subscribe(res => {
+        this.clss = 'grn';
+        this.msg = 'employees successfully deleted';
+        }, err => {
+                      this.clss = 'rd';
+          this.msg = 'Something went wrong during deleting employee';
+                  }
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
               );
   });		
   } else {
     this.clss = 'rd';
+<<<<<<< HEAD
     this.msg = 'You must select at least one designation';
+=======
+    this.msg = 'You must select at least one employee';
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   }
   this.getDesignation();
 }

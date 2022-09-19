@@ -44,17 +44,28 @@ export class DepartmentComponent implements OnInit {
       const index: number = this.departmentData.indexOf(row);
       if (index !== -1) {
           this.departmentData.splice(index, 1);
+<<<<<<< HEAD
           alert("Department delete successfully")
       }    
 
     })
+=======
+      }    
+
+    })
+    // No need to Refresh
+   // this.getDepartment();
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
    }
   }
   onEdit(item: any) {
     debugger;
     this.departmentData.forEach(element => {
       element.isEdit = false;
+<<<<<<< HEAD
      
+=======
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
     });
     item.isEdit = true;
   }
@@ -70,6 +81,7 @@ export class DepartmentComponent implements OnInit {
 isAllCheckBoxChecked() {
   return this.departmentData.every(row => row.checked);
 }
+<<<<<<< HEAD
 deleteSelectedDepartment(): void {
   const selectedDepartments= this.departmentData.
   filter(employee => employee.checked).map(row => row.id);
@@ -93,4 +105,29 @@ deleteSelectedDepartment(): void {
        }
           this.getDepartment();
     }
+=======
+deleteEmployees(): void {
+  const selectedEmployees= this.departmentData.
+  filter(employee => employee.checked).map(row => row.id);
+
+  if(selectedEmployees && selectedEmployees.length > 0) {
+  
+    selectedEmployees.forEach(id => {
+      this.departmentService.deleteEmployees(id)
+      .subscribe(res => {
+        this.clss = 'grn';
+        this.msg = 'employees successfully deleted';
+        }, err => {
+                      this.clss = 'rd';
+          this.msg = 'Something went wrong during deleting employee';
+                  }
+              );
+  });		
+  } else {
+    this.clss = 'rd';
+    this.msg = 'You must select at least one employee';
+  }
+  this.getDepartment();
+}
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 }

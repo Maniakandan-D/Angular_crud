@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Status } from '../shared/status.model';
 import { StatusService } from '../shared/status.service';
+<<<<<<< HEAD
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+=======
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 
 @Component({
   selector: 'app-status-add',
@@ -11,6 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./status-add.component.css']
 })
 export class StatusAddComponent implements OnInit {
+<<<<<<< HEAD
   form!: FormGroup;
   myForm: Status = new Status();
 
@@ -41,6 +45,25 @@ export class StatusAddComponent implements OnInit {
       return true;
     }
     }
+=======
+  myForm: Status = new Status();
+  constructor(private statusService: StatusService,
+    private router:Router) { }
+
+  ngOnInit(): void {
+  }
+  addStatus(){
+    this.statusService.addStatus(this.myForm)
+    .subscribe({
+      next:(data) => {
+        this.router.navigate(["/status"])
+      },
+      error:(err) => {
+        console.log(err);
+      }
+    });
+  }
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   back(){
     this.router.navigate(['/status']);
    }

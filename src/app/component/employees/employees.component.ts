@@ -39,8 +39,12 @@ export class EmployeesComponent implements OnInit {
     .subscribe(res => { 
       const index: number = this.employees.indexOf(row);
       if (index !== -1) {
+<<<<<<< HEAD
           this.employees.splice(index, 1)
           alert("Employee delete successfully");
+=======
+          this.employees.splice(index, 1);
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
       }    
     });
    }
@@ -58,7 +62,11 @@ export class EmployeesComponent implements OnInit {
   isAllCheckBoxChecked() {
 		return this.employees.every(row => row.checked);
 	}
+<<<<<<< HEAD
   deleteMultiEmployees(): void {
+=======
+  deleteEmployees(): void {
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 		const selectedEmployees= this.employees.
     filter(employee => employee.checked).map(row => row.id);
 	
@@ -81,7 +89,10 @@ export class EmployeesComponent implements OnInit {
 		}
 		this.getEmployee();
 	}
+<<<<<<< HEAD
   employee(){
     console.log(Employees)
   }
+=======
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 }

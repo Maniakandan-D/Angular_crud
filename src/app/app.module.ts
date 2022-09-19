@@ -12,6 +12,10 @@ import { EmployeeEditComponent } from './component/employees/employee-edit/emplo
 import { EmployeeAddComponent } from './component/employees/employee-add/employee-add.component';
 import { EmployeeModule } from './component/employees/module/employee.module';
 import { HttpClientModule } from '@angular/common/http';
+<<<<<<< HEAD
+=======
+import { FormsModule } from '@angular/forms';
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 import { EmployeeViewComponent } from './component/employees/employee-view/employee-view.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -27,7 +31,12 @@ import { DepartmentViewComponent } from './component/department/department-view/
 import { DesignationViewComponent } from './component/designation/designation-view/designation-view.component';
 import { StatusAddComponent } from './component/status/status-add/status-add.component';
 import { StatusModule } from './component/status/module/status.module';
+<<<<<<< HEAD
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+=======
+
+
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 
 
 @NgModule({
@@ -48,7 +57,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     StatusViewComponent,
     DepartmentViewComponent,
     DesignationViewComponent,
+<<<<<<< HEAD
     StatusAddComponent
+=======
+    StatusAddComponent,
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   ],
   imports: [
     BrowserModule,
@@ -61,9 +74,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DepartmentModule,
     DesignationModule,
     StatusModule,
+<<<<<<< HEAD
     Ng2OrderModule,
     ReactiveFormsModule
     ],
+=======
+    Ng2OrderModule
+  ],
+>>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   providers: [],
   bootstrap: [AppComponent]
 })
