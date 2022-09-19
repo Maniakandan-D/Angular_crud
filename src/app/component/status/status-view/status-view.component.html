@@ -1,0 +1,14 @@
+<h2>Status Details </h2>
+
+    <hr/>
+    <div *ngIf="Status">
+        <div>
+            <label><b>Emp Code:  </b></label> {{Status.statusCode}}
+        </div>
+        <div>
+            <label><b>Status:  </b></label>{{Status.status}}
+        </div>
+    </div>
+    <button (click)="list()" class="btn btn-secondary">Back</button>
+
+

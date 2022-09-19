@@ -1,0 +1,101 @@
+<legend><b>Employee Details</b></legend>
+
+<form [formGroup]="form" (ngSubmit)="submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="empCode">Emp Code</label>
+        <div class="input-group">
+          <input type="text" class="form-control" formControlName="empCode" name="empCode" [(ngModel)]="employeeForm.empCode" [class.is-invalid]="localForm.submitted && form.get('empCode')?.invalid" autocomplete="off" />
+          <div class="invalid-feedback">
+            Employee code required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="firstname">Name</label>
+        <div class="input-group">
+          <input type="text" class="form-control" formControlName="name" name="name" [(ngModel)]="employeeForm.name" [class.is-invalid]="localForm.submitted && form.get('name')?.invalid" autocomplete="off"/>
+          <div class="invalid-feedback">
+            Name required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-group">
+          <input type="text" class="form-control"  formControlName="email" name="email" [(ngModel)] = "employeeForm.email" [class.is-invalid]="localForm.submitted && form.get('email')?.invalid" autocomplete="off"/>
+          <div class="invalid-feedback">
+             E-mail required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="designation">Designation</label>
+        <div class="input-group">
+          <select   type="dropdown" class="form-control" formControlName="designation" name="designation" [(ngModel)]="employeeForm.designation" [class.is-invalid]="localForm.submitted && form.get('designation')?.invalid" autocomplete="off">
+              <option value="default"></option>
+              <option *ngFor="let design of designation">{{design.designation}}</option>
+          </select>
+          <div class="invalid-feedback">
+            Designation required
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label for="department">Department</label>
+        <div class="input-group">
+          <select  type="dropdown" class="form-control" formControlName="department" name="department" [(ngModel)]="employeeForm.department" [class.is-invalid]="localForm.submitted && form.get('department')?.invalid" autocomplete="off" >
+            <option value="default"></option>
+            <option *ngFor="let dept of department">{{dept.department}}</option>
+          </select>
+          <div class="invalid-feedback">
+            Department required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="date">Date of Joining</label>
+        <div class="input-group">
+          <input type="date" class="form-control" formControlName="date" name="date" [(ngModel)]="employeeForm.date" [class.is-invalid]="localForm.submitted && form.get('date')?.invalid" autocomplete="off"/>
+          <div class="invalid-feedback">
+            Date of Joining required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <div class="input-group">
+          <select type="dropdown" class="form-control" formControlName="status" name="status" [(ngModel)]="employeeForm.status" [class.is-invalid]="localForm.submitted && form.get('status')?.invalid" autocomplete="off">
+            <option>Confirmed</option>
+            <option>Probation</option>
+          </select>
+          <div class="invalid-feedback">
+            Status required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="salary">Salary</label>
+        <div class="input-group">
+          <input type="text" class="form-control" formControlName="salary" name="salary" [(ngModel)]="employeeForm.salary" [class.is-invalid]="localForm.submitted && form.get('salary')?.invalid" autocomplete="off" />
+          <div class="invalid-feedback">
+            Salary required
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-1">
+      <button type="submit"  class="btn btn-primary">Add</button>
+    </div>
+    <div class="col-1">
+      <button type="button" (click)="back()" class="btn btn-secondary">Back</button>
+    </div>
+  </div>
+</form>
+

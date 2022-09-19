@@ -1,0 +1,37 @@
+
+  <legend>Designation Details</legend>
+  <form [formGroup]="form" (ngSubmit)="form.valid && submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="designationCode">Designation Code</label>
+          <div class="input-group">
+            <input type="text" class="form-control" formControlName="designationCode" name="designationCode" [(ngModel)]="myForm.designationCode" [class.is-invalid]="localForm.submitted && form.get('designationCode')?.invalid" autocomplete="off" />
+            <div class="invalid-feedback">
+              Designation Code required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label for="designation">Designation</label>
+          <div class="input-group">
+            <input type="text" class="form-control" formControlName="designation" name="designation" [(ngModel)]="myForm.designation" [class.is-invalid]="localForm.submitted && form.get('designation')?.invalid" autocomplete="off" />
+            <div class="invalid-feedback">
+              Designation required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-1">
+        <button type="submit"  class="btn btn-primary">Add</button>
+      </div>
+      <div class="col-1">
+        <button type="button" (click)="back()" class="btn btn-secondary">Back</button>
+      </div>
+    </div>
+  </form>

@@ -1,0 +1,40 @@
+<legend>Status Details</legend>
+<form [formGroup]="form" (ngSubmit)="submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="statusCode">Status Code</label>
+        <div class="input-group">
+          <input type="text" class="form-control" formControlName="statusCode" name="statusCode" [(ngModel)]="myForm.statusCode" [class.is-invalid]="localForm.submitted && form.get('statusCode')?.invalid" autocomplete="off" />
+          <div class="invalid-feedback">
+            Status Code required
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label for="status">Status</label>
+        <div class="input-group">
+          <select type="dropdown" class="form-control" formControlName="status" name="status" [(ngModel)]="myForm.status" [class.is-invalid]="localForm.submitted && form.get('status')?.invalid" autocomplete="off">
+            <option>Confirmed</option>
+            <option>Probation</option>
+          </select>
+          <div class="invalid-feedback">
+            Status required
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-1">
+      <button type="submit"  class="btn btn-primary">Add</button>
+    </div>
+    <div class="col-1">
+      <button type="button" (click)="back()" class="btn btn-secondary">Back</button>
+    </div>
+  </div>
+</form>
+

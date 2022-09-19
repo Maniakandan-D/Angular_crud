@@ -1,0 +1,12 @@
+<h2> Designation Details </h2>
+
+    <hr/>
+    <div *ngIf="designations">
+        <div>
+            <label><b>Designation Code:  </b></label> {{designations.designationCode}}
+        </div>
+        <div>
+            <label><b>Designation:  </b></label>{{designations.designation}}
+        </div>
+    </div>
+    <button (click)="list()" class="btn btn-secondary">Back</button>
