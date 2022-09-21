@@ -23,6 +23,9 @@ export class StatusService {
    getStatusByName(name: string) {
     return this.http.get<Status>(`http://localhost:3000/Status/?status=${name}`);
    }
+   getStatusByCode(code: number) {
+    return this.http.get<Status>(`http://localhost:3000/Status/?statusCode=${code}`);
+   }
    updateStatus(data: Status){
     return this.http.put(`http://localhost:3000/Status/${data.id}`,data);
    }

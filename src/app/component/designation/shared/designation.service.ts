@@ -25,6 +25,9 @@ export class DesignationService {
    getDesignationByName(name: string) {
     return this.http.get<Designation>(`http://localhost:3000/Designation/?designation=${name}`);
    }
+   getDesignationByCode(code: number) {
+    return this.http.get<Designation>(`http://localhost:3000/Designation/?designationCode=${code}`);
+   }
 
    updateDesignation(data: Designation){
     return this.http.put(`http://localhost:3000/Designation/${data.id}`,data);

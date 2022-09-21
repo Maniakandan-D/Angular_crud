@@ -129,7 +129,7 @@ deleteSelectedDepartment(): void {
             }
             else
             {
-                  this.notifyService.showError(`department name:${{}} already exists..!`)
+                  this.notifyService.showError(`department name already exists..!`)
             }
       });
      //call update service

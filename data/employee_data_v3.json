@@ -1164,7 +1164,7 @@
   "Departments": [
     {
       "id": "6327e90268b4664de161c192",
-      "departmentCode": 1001,
+      "departmentCode": "1001",
       "department": "Software",
       "createdOn": "2022-09-19T09:28:58.z",
       "modifiedOn": "2022-09-19T09:28:58 -06:-30",

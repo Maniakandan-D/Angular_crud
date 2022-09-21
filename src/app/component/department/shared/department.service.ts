@@ -25,6 +25,9 @@ export class DepartmentService {
    getDepartmentByName(name: string) {
     return this.http.get<Department>(`http://localhost:3000/Departments/?department=${name}`);
    }
+   getDepartmentByCode(code: number) {
+    return this.http.get<Department>(`http://localhost:3000/Departments/?departmentCode=${code}`);
+   }
    update(data: Department){
     return this.http.put(`http://localhost:3000/Departments/${data.id}`,data);
    }
