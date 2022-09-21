@@ -1,7 +1,6 @@
 
   <legend>Department Details</legend>
-<<<<<<< HEAD
-  <form [formGroup]="form" (ngSubmit)="submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
+  <form [formGroup]="form" (ngSubmit)="form.valid && submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
     <div class="row">
       <div class="col-6">
         <div class="form-group">
@@ -35,25 +34,4 @@
         <button type="button" (click)="back()" class="btn btn-secondary">Back</button>
       </div>
     </div>
-=======
-  <form #departmentForm="ngForm">
-    <div class="row">
-      <div class="col">
-        <div class="mb-3">
-          <label for="txtEmpCode" class="form-label">Emp Code</label>
-          <input type="text"  class="form-control"  name="empCode" [(ngModel)]="deptForm.empCode"  id="txtEmpCode" autocomplete="off" required #empCode="ngModel"  ngModel/>
-          <span *ngIf="empCode.invalid && empCode.touched" class="errormessage"> Emp Code is Required</span>
-        </div>
-      </div>
-      <div class="col">
-        <div class="mb-3">
-          <label for="txtDepartment" class="form-label">Department</label>
-          <input type="text"  class="form-control" name="department" [(ngModel)] = "deptForm.department"  id="txtDepartment" autocomplete="off" required #department="ngModel"  ngModel/>
-          <span *ngIf="department.invalid && department.touched" class="errormessage">Department is Required</span>
-        </div>
-      </div>
-    </div>
-    <button [disabled]="departmentForm.invalid" type="submit" (click)="addDepartment()" class="btn btn-primary">Add</button>
-    <button type="button" (click)="back()" class="btn btn-secondary mx-4">Back</button>
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   </form>

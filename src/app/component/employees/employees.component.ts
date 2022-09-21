@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employees } from './shared/employee.model';
 import { EmployeeService } from './shared/employee.service';
+import { AlertService } from 'src/app/shared/alertService/alert.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class EmployeesComponent implements OnInit {
 
     msg: string = '';
     clss: string = '';
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService,  private notifyService : AlertService) { }
 
   ngOnInit(): void {
     this.getEmployee();
@@ -39,12 +40,8 @@ export class EmployeesComponent implements OnInit {
     .subscribe(res => { 
       const index: number = this.employees.indexOf(row);
       if (index !== -1) {
-<<<<<<< HEAD
           this.employees.splice(index, 1)
-          alert("Employee delete successfully");
-=======
-          this.employees.splice(index, 1);
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
+          this.notifyService.showSuccess("Employee deleted successfully");
       }    
     });
    }
@@ -62,11 +59,7 @@ export class EmployeesComponent implements OnInit {
   isAllCheckBoxChecked() {
 		return this.employees.every(row => row.checked);
 	}
-<<<<<<< HEAD
   deleteMultiEmployees(): void {
-=======
-  deleteEmployees(): void {
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 		const selectedEmployees= this.employees.
     filter(employee => employee.checked).map(row => row.id);
 	
@@ -89,10 +82,7 @@ export class EmployeesComponent implements OnInit {
 		}
 		this.getEmployee();
 	}
-<<<<<<< HEAD
   employee(){
     console.log(Employees)
   }
-=======
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 }

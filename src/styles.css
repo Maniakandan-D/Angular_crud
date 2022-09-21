@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr';
 body{
     /* background-color: #efefef !important; */
     padding-top: 100px;
@@ -9,9 +10,5 @@ body{
 .list-group-item{
     border: none;
     border-bottom: 1px solid #ddd;
-<<<<<<< HEAD
 } */
 
-=======
-} */
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d

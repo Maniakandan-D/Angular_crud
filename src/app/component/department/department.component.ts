@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/shared/alertService/alert.service';
 import { Department } from './shared/department.model';
 import { DepartmentService } from './shared/department.service';
 
@@ -17,17 +18,17 @@ export class DepartmentComponent implements OnInit {
   page:number = 1;
   pageSize:number =5;
   //edit
-  isEdit: boolean = false;
-  //checkbox
-  selectedDepartment : Department[];
+  isLoader: boolean;
   // sorting
   key: string = 'id';
   reverse: boolean = false;
   msg: string = '';
   clss: string = '';
 
-  constructor(private departmentService: DepartmentService) { }
-
+  constructor(private departmentService: DepartmentService, private notifyService : AlertService) {
+    this.isLoader = true;
+   }
+  
   ngOnInit(): void {
     this.getDepartment();
   }
@@ -43,32 +44,14 @@ export class DepartmentComponent implements OnInit {
     .subscribe(res => { 
       const index: number = this.departmentData.indexOf(row);
       if (index !== -1) {
-          this.departmentData.splice(index, 1);
-<<<<<<< HEAD
-          alert("Department delete successfully")
+          this.departmentData.splice(index, 1)
+          this.notifyService.showSuccess("Department deleted successfully");
       }    
 
     })
-=======
-      }    
-
-    })
-    // No need to Refresh
-   // this.getDepartment();
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
    }
   }
-  onEdit(item: any) {
-    debugger;
-    this.departmentData.forEach(element => {
-      element.isEdit = false;
-<<<<<<< HEAD
-     
-=======
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
-    });
-    item.isEdit = true;
-  }
+
  //sorting
  sort(key){
   this.key = key;
@@ -81,7 +64,6 @@ export class DepartmentComponent implements OnInit {
 isAllCheckBoxChecked() {
   return this.departmentData.every(row => row.checked);
 }
-<<<<<<< HEAD
 deleteSelectedDepartment(): void {
   const selectedDepartments= this.departmentData.
   filter(employee => employee.checked).map(row => row.id);
@@ -105,29 +87,52 @@ deleteSelectedDepartment(): void {
        }
           this.getDepartment();
     }
-=======
-deleteEmployees(): void {
-  const selectedEmployees= this.departmentData.
-  filter(employee => employee.checked).map(row => row.id);
+    // inlineEdit
+    addDepartment(){
+      this.departmentData['isEdit'] = true;
+    }
+    getdepartment(){
+      this.isLoader = false;
+      this.departmentService.getDepartment().subscribe((res: any) => {
+       debugger;
+       this.departmentData = res;
+       this.departmentData.forEach(element => {
+        element['isEdit'] = false;
+       });
+       this.isLoader = false;
+      },error => {
+      this.isLoader = false;
+      });
+    }
+    cancel(data){
+      
+      data.isEdit = false;
+    }
+    getDepartmentId(data){
+     data.isEdit = true;
+     this.departmentData;
+    }
+    update(rowData){
 
-  if(selectedEmployees && selectedEmployees.length > 0) {
-  
-    selectedEmployees.forEach(id => {
-      this.departmentService.deleteEmployees(id)
-      .subscribe(res => {
-        this.clss = 'grn';
-        this.msg = 'employees successfully deleted';
-        }, err => {
-                      this.clss = 'rd';
-          this.msg = 'Something went wrong during deleting employee';
-                  }
-              );
-  });		
-  } else {
-    this.clss = 'rd';
-    this.msg = 'You must select at least one employee';
-  }
-  this.getDepartment();
-}
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
+      //check row data has changed
+      
+     //validate
+     this.departmentService
+         .getDepartmentByName(rowData.department)
+          .subscribe((data: any)=>{
+
+            if(data.length ==0)
+            {
+                  rowData.isEdit = false;
+                  this.departmentService.update(rowData).subscribe((updatedData)=>{});
+                  this.notifyService.showSuccess("Department updated successfully")      
+            }
+            else
+            {
+                  this.notifyService.showError(`department name:${{}} already exists..!`)
+            }
+      });
+     //call update service
+    
+    }
 }

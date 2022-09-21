@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmployeeService } from '../shared/employee.service';
 import { Employees } from '../shared/employee.model';
-<<<<<<< HEAD
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Designation } from '../../designation/shared/designation.model';
 import { DesignationService } from '../../designation/shared/designation.service';
 import { DepartmentService } from '../../department/shared/department.service';
 import { Department } from '../../department/shared/department.model';
-=======
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
+import { AlertService } from 'src/app/shared/alertService/alert.service';
 
 
 @Component({
@@ -18,7 +16,6 @@ import { Department } from '../../department/shared/department.model';
   styleUrls: ['./employee-add.component.css']
 })
 export class EmployeeAddComponent implements OnInit {
-<<<<<<< HEAD
 
  designation: Designation[] = [];
  department : Department [] = [];
@@ -40,7 +37,7 @@ export class EmployeeAddComponent implements OnInit {
 
   constructor(private employeeService: EmployeeService,
     private router:Router, private formBuilder: FormBuilder, private designationService: DesignationService
-    , private departmentService: DepartmentService) { }
+    , private departmentService: DepartmentService, private notifyService : AlertService) { }
 
   ngOnInit(): void {
       this.form = this.formBuilder.group({
@@ -59,6 +56,7 @@ export class EmployeeAddComponent implements OnInit {
   }
   submitForm(){
   if(this.form.get('empCode').value ==''){
+    this.notifyService.showError("Something went wrong")
     return true;
     
   }
@@ -67,6 +65,7 @@ export class EmployeeAddComponent implements OnInit {
     this.employeeService.addEmployee(this.employeeForm)
     .subscribe({
       next: (data) =>{
+        this.notifyService.showSuccess("Employee added successfully !!")
         this.router.navigate(['/employees']);
       },
       error: (err) =>{
@@ -96,38 +95,3 @@ export class EmployeeAddComponent implements OnInit {
   }
 }
 
-=======
-  employeeForm: Employees = {
-    id: '',
-    empCode: '',
-    name :'',
-    email : '',
-    designation :'',
-    department :'',
-    date :'',
-    status :'',
-    salary :''
-};
-
-  constructor(private employeeService: EmployeeService,
-    private router:Router) { }
-
-  ngOnInit(): void {
-  }
-  
-  addEmployee(){
-    this.employeeService.addEmployee(this.employeeForm)
-    .subscribe({
-      next:(data) => {
-        this.router.navigate(["/employees"])
-      },
-      error:(err) => {
-        console.log(err);
-      }
-    });
-  }
-  back(){
-    this.router.navigate(['/employees']);
-   }
-}
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d

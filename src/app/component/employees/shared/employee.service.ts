@@ -3,10 +3,6 @@ import{ HttpClient, HttpHeaders } from '@angular/common/http';
 import { Employees } from './employee.model';
 import { map } from 'rxjs/operators';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -15,11 +11,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class EmployeeService {
-<<<<<<< HEAD
-
-=======
-  productUrl ='http://localhost:3000';
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 
   constructor(private http: HttpClient) { }
 
@@ -51,9 +42,6 @@ export class EmployeeService {
     return res
   }));
 }
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 }

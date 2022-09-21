@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employees } from '../shared/employee.model';
 import { EmployeeService } from '../shared/employee.service';
+import { AlertService } from 'src/app/shared/alertService/alert.service';
 
 @Component({
   selector: 'app-employee-edit',
@@ -9,10 +10,7 @@ import { EmployeeService } from '../shared/employee.service';
   styleUrls: ['./employee-edit.component.css']
 })
 export class EmployeeEditComponent implements OnInit {
-<<<<<<< HEAD
   alert: boolean;
-=======
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   employeeForm: Employees ={
     id: '',
     empCode: '',
@@ -22,16 +20,12 @@ export class EmployeeEditComponent implements OnInit {
     department :'',
     date :[''],
     status :'',
-<<<<<<< HEAD
     salary :['']
-=======
-    salary :[''],
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 };
 
   constructor(private route: ActivatedRoute,
     private router:Router,
-    private employeeService: EmployeeService) { }
+    private employeeService: EmployeeService,private notifyService : AlertService ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((param) => {
@@ -48,32 +42,21 @@ export class EmployeeEditComponent implements OnInit {
     this.employeeService.update(this.employeeForm)
     .subscribe({
       next:(data) => {
-<<<<<<< HEAD
-        
+        this.notifyService.showSuccess("employee updated successfully !!")
        //direct to employees
         this.router.navigate(["/employees"]);
         
       },
       error:(err) => {
         console.log(err);
-        this.alert =true;
-=======
-       //direct to employees
-        this.router.navigate(["/employees"]);
-      },
-      error:(err) => {
-        console.log(err);
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
+        this.notifyService.showError("Something went wrong");
       }
     })
   }
   cancel(){
     this.router.navigate(['/employees']);
    }
-<<<<<<< HEAD
      closeAlert(){
     this.alert = false;
   }
-=======
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
 }

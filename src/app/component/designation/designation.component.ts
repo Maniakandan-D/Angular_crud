@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/shared/alertService/alert.service';
 import { Designation } from './shared/designation.model';
 import { DesignationService } from './shared/designation.service';
 
@@ -19,15 +20,13 @@ export class DesignationComponent implements OnInit {
    // sorting
   key: string = 'id';
   reverse: boolean = false;
-<<<<<<< HEAD
 // MultiDelete
-=======
-
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   msg: string = '';
   clss: string = '';
+  //edit
+  isLoader: boolean;
 
-  constructor(private designationService: DesignationService) { }
+  constructor(private designationService: DesignationService, private notifyService : AlertService) { this.isLoader = true; }
 
   ngOnInit(): void {
     this.getDesignation();
@@ -40,31 +39,17 @@ export class DesignationComponent implements OnInit {
   deleteDesignation(row : any){
     // add confirmation before deleting 
     if (confirm("Are you sure to delete ?")){
-<<<<<<< HEAD
     this.designationService.deleteDesignation(row.id)
     .subscribe(res => { 
       const index: number = this.designationData.indexOf(row);
       if (index !== -1) {
           this.designationData.splice(index, 1)
-          alert("Designation delete successfully");
-=======
-    this.designationService.delete(row.id)
-    .subscribe(res => { 
-      const index: number = this.designationData.indexOf(row);
-      if (index !== -1) {
-          this.designationData.splice(index, 1);
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
+          this.notifyService.showSuccess("Designation deleted successfully");
       }    
     });
    }
   }
-  onEdit(item: any) {
-    debugger;
-    this.designationData.forEach(element => {
-      element.isEdit = false;
-    });
-    item.isEdit = true;
-  }
+
   //sorting
   sort(key){
     this.key = key;
@@ -77,7 +62,6 @@ export class DesignationComponent implements OnInit {
 isAllCheckBoxChecked() {
   return this.designationData.every(row => row.checked);
 }
-<<<<<<< HEAD
 deleteMultiDesignation(): void {
   const selectedDesignation= this.designationData.
   filter(employee => employee.checked).map(row => row.id);
@@ -93,33 +77,59 @@ deleteMultiDesignation(): void {
             this.clss = 'rd';
           this.msg = 'Something went wrong during deleting designation';
          }
-=======
-deleteEmployees(): void {
-  const selectedEmployees= this.designationData.
-  filter(employee => employee.checked).map(row => row.id);
-
-  if(selectedEmployees && selectedEmployees.length > 0) {
-  
-    selectedEmployees.forEach(id => {
-      this.designationService.deleteEmployees(id)
-      .subscribe(res => {
-        this.clss = 'grn';
-        this.msg = 'employees successfully deleted';
-        }, err => {
-                      this.clss = 'rd';
-          this.msg = 'Something went wrong during deleting employee';
-                  }
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
               );
   });		
   } else {
     this.clss = 'rd';
-<<<<<<< HEAD
     this.msg = 'You must select at least one designation';
-=======
-    this.msg = 'You must select at least one employee';
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   }
   this.getDesignation();
+}
+
+// inlineEdit
+addDepartment(){
+  this.designationData['isEdit'] = true;
+}
+getdesignation(){
+  this.isLoader = false;
+  this.designationService.getDesignation().subscribe((res: any) => {
+   debugger;
+   this.designationData = res;
+   this.designationData.forEach(element => {
+    element['isEdit'] = false;
+   });
+   this.isLoader = false;
+  },error => {
+  this.isLoader = false;
+  });
+}
+cancel(data){
+  
+  data.isEdit = false;
+}
+getDesignationId(data){
+ data.isEdit = true;
+ this.designationData;
+}
+update(rowData){
+
+  //check row data has changed
+  
+ //validate
+ this.designationService
+     .getDesignationByName(rowData.designation)
+      .subscribe((data: any)=>{
+
+        if(data.length ==0)
+        {
+              rowData.isEdit = false;
+              this.designationService.updateDesignation(rowData).subscribe((updatedData)=>{});
+              this.notifyService.showSuccess("Designation updated successfully")      
+        }
+        else
+        {
+              this.notifyService.showError(`Designation name already exists..!`)
+        }
+  });
 }
 }

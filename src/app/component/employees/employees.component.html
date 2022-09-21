@@ -1,9 +1,5 @@
 <h3 style="padding-bottom: 40px; padding-top: 20px;">Employee Table</h3>
-<<<<<<< HEAD
 <div *ngIf="employees && employees.length > 0">
-=======
-<div *ngIf="employees && employees.length > 0; else elseBlock">
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   
   <nav class="navbar navbar-expand-lg navbar-light mt-2">
       <a class="navbar-brand" href="#"></a>
@@ -17,11 +13,7 @@
                   Action
               </a>
               <div class="dropdown-menu">
-<<<<<<< HEAD
                   <a class="dropdown-item" (click)="deleteMultiEmployees()">Delete</a>
-=======
-                  <a class="dropdown-item" (click)="deleteEmployees()">Delete</a>
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
               </div>
           </li>
           <li class="nav-item btn-group dropright">
@@ -60,7 +52,6 @@
       <thead>
         <tr>
           <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
-<<<<<<< HEAD
           <th scope="col" (click)="sort('id')">Emp Code <i class="fas fa-sort"></i></th>
           <th scope="col" (click)="sort('name')">Name <i class="fas fa-sort"></i></th>
           <th scope="col" (click)="sort('email')">E-mail <i class="fas fa-sort"></i></th>
@@ -70,17 +61,6 @@
           <th scope="col" (click)="sort('status')">Status <i class="fas fa-sort"></i></th>
           <th scope="col" (click)="sort('salary')">Salary <i class="fas fa-sort"></i></th>
           <th scope="col" ></th>
-=======
-          <th (click)="sort('empCode')" scope="col">Emp Code <i class="fas fa-sort"></i></th>
-          <th (click)="sort('name')"  scope="col">Name <i class="fas fa-sort"></i></th>
-          <th (click)="sort('email')" scope="col">E-mail <i class="fas fa-sort"></i></th>
-          <th (click)="sort('designation')" scope="col">Designation <i class="fas fa-sort"></i></th>
-          <th (click)="sort('department')" scope="col">Department <i class="fas fa-sort"></i></th>
-          <th (click)="sort('date')" scope="col">DOJ <i class="fas fa-sort"></i></th>
-          <th (click)="sort('status')" scope="col">Status <i class="fas fa-sort"></i></th>
-          <th (click)="sort('salary')" scope="col">Salary <i class="fas fa-sort"></i></th>
-          <th scope="col"></th>
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
         </tr>
       </thead>
       <tbody>
@@ -103,21 +83,12 @@
       </tbody>
   </table>
 </div>
-<<<<<<< HEAD
 
  
  <!-- pagination -->
 <div class="pagination">
   <label class="col-md ml-auto">Select Page</label>
     <div class="col-md-offset-11 ml-auto">
-=======
-<ng-template #elseBlock><div style="color: red;">No record found</div></ng-template>
- 
- <!-- pagination -->
-<div class="pagination">
-    <div class="col-md-offset-11 ml-auto">
-      <label>Select Page</label>
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
       <select id="PerPage" class="form-control" [(ngModel)]="pageSize">
           <option [ngValue]="5">5</option>
           <option [ngValue]="10">10</option>

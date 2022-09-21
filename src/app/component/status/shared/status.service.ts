@@ -20,34 +20,22 @@ export class StatusService {
   getStatusById(id: string) {
     return this.http.get<Status>(`http://localhost:3000/Status/${id}`);
    }
-<<<<<<< HEAD
+   getStatusByName(name: string) {
+    return this.http.get<Status>(`http://localhost:3000/Status/?status=${name}`);
+   }
    updateStatus(data: Status){
     return this.http.put(`http://localhost:3000/Status/${data.id}`,data);
    }
    deleteStatus(id:string){
-=======
-   update(data: Status){
-    return this.http.put(`http://localhost:3000/Status/${data.id}`,data);
-   }
-   delete(id:string){
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
     return this.http.delete<Status>(`http://localhost:3000/Status/${id}`).pipe(map((res: any ) =>{
       return res
     }));
  }
-<<<<<<< HEAD
  getStatusDetails(id: string){
   return this.http.get<Status>(`http://localhost:3000/Status/${id}`);
  }
  //MultipleDelete
  deleteMultiStatus(id : string){
-=======
- getDetails(id: string){
-  return this.http.get<Status>(`http://localhost:3000/Status/${id}`);
- }
- //MultipleDelete
- deleteEmployees(id : string){
->>>>>>> 0b374fea9a8bcce8e53828033ad8204effe8be1d
   return this.http.delete<any>(`http://localhost:3000/Status/${id}`).pipe(map((res: any ) =>{
     return res
   }));
