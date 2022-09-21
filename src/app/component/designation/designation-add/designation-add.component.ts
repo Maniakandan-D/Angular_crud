@@ -23,26 +23,30 @@ export class DesignationAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      designationCode:  [ '',
-        [Validators.required]
-      ],
       designation:  [ '',
         [Validators.required]
       ],
     }, {updateOn: 'change' });
   }
   submitForm(){
-   this.designationService.addDesignation(this.myForm)
-      .subscribe({
-        next:(data) => {
-          this.notifyService.showSuccess("Designation added successfully !!")
-          this.router.navigate(["/designation"])
-        },
-        error: (err) =>{
-          console.log(err)
-          this.notifyService.showError("Something went wrong");
-        }
-      });
+    var designation = this.form.get('designation').value;
+    this.designationService.getDesignationByName(designation).subscribe((data: any)=>{
+      if(data.length > 0){
+        this.notifyService.showWarning("Designation name already exists..!");
+      }else{
+        this.designationService.addDesignation(this.myForm)
+        .subscribe({
+          next:(data) => {
+            this.notifyService.showSuccess("Designation added successfully !!")
+            this.router.navigate(["/designation"])
+          },
+          error: (err) =>{
+            console.log(err)
+            this.notifyService.showError("Something went wrong");
+          }
+        });
+      }
+    });
       return true;
     }
   back(){

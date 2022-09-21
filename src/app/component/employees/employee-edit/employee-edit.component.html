@@ -1,16 +1,13 @@
 
     <legend>Edit</legend>
-    <div *ngIf="alert" class="col-md-8 mb-6">
-      <div  class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success !</strong> Employee updated successfully.
-        <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </div>
     <form #empFrom="ngForm">
       <div class="row">
         <div class="col">
+          <div class="mb-3">
+            <label for="txtempCode" class="form-label">Emp code</label>
+            <input type="text"  class="form-control" minlength="2" name="empCode" [(ngModel)]="employeeForm.empCode"  id="txtempCode" autocomplete="off" required #empCode="ngModel"  ngModel/>
+            <span *ngIf="empCode.invalid && name.touched" class="errormessage"> Employee code is Required</span>
+          </div>
           <div class="mb-3">
             <label for="txtName" class="form-label">Name</label>
             <input type="text"  class="form-control" minlength="4" name="name" [(ngModel)]="employeeForm.name"  id="txtName" autocomplete="off" required #name="ngModel"  ngModel/>
@@ -32,6 +29,8 @@
             </select>
             <span *ngIf="designation.invalid && designation.touched" class="errormessage"> Designation is Required</span>
           </div>
+        </div>
+        <div class="col">
           <div class="mb-3">
             <label for="txtDepartment" class="form-label">Department</label>
             <select name="department" [(ngModel)] = "employeeForm.department" class="form-control" id="txtDepartment" autocomplete="off" required #department="ngModel"  ngModel>
@@ -43,8 +42,6 @@
             </select>
             <span *ngIf="department.invalid && department.touched" class="errormessage">Department is Required</span>
           </div>
-        </div>
-        <div class="col">
           <div class="mb-3">
             <label for="txtDate" class="form-label">Date of Joining</label>
             <input type="date" name="date" [(ngModel)] = "employeeForm.date" class="form-control" id="txtDate" autocomplete="off"  required  #date="ngModel"  ngModel/>

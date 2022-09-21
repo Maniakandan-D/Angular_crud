@@ -94,14 +94,14 @@ deleteSelectedDepartment(): void {
     getdepartment(){
       this.isLoader = false;
       this.departmentService.getDepartment().subscribe((res: any) => {
-       debugger;
+        debugger;
        this.departmentData = res;
        this.departmentData.forEach(element => {
         element['isEdit'] = false;
        });
        this.isLoader = false;
       },error => {
-      this.isLoader = false;
+        this.isLoader = false;
       });
     }
     cancel(data){
@@ -114,9 +114,9 @@ deleteSelectedDepartment(): void {
     }
     update(rowData){
 
-      //check row data has changed
+    //check row data has changed
       
-     //validate
+    //validate
      this.departmentService
          .getDepartmentByName(rowData.department)
           .subscribe((data: any)=>{

@@ -21,33 +21,37 @@ export class DepartmentAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      departmentCode:  [ '', [Validators.required]
-                         ],
       department: [ '', [Validators.required]
-                     ],
+      ],
     }, {updateOn: 'change' });
   }
 
 
   submitForm(){
-    if(this.form.get('department').value ==''){
-      this.notifyService.showError("Something went wrong")
-      return true;   
-    }
-    else
-    {
+    
+    var department = this.form.get('department').value;
+    
+    this.departmentService.getDepartmentByName(department).subscribe((data:any)=>{
+
+      if(data.length > 0)
+      {
+     this.notifyService.showWarning("Department name already exists")
+      }
+      else
+      {
       this.departmentService.addDepartment(this.deptForm)
       .subscribe({
         next:(data) => {
           this.notifyService.showSuccess("Department added successfully !!")
           this.router.navigate(["/department"])
         },
-      });
-     
-      console.log(this.form.value)
-      return true;
+      }); 
     }
+});
+ return true;  
+
     }
+
   back(){
     this.router.navigate(['/department']);
    }

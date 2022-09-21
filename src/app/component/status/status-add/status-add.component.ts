@@ -20,7 +20,6 @@ export class StatusAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      statusCode: this.formBuilder.control ('', Validators.required),
       status: this.formBuilder.control ('', Validators.required),
     }, {updateOn: 'change' });
   }

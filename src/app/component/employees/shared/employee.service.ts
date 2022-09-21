@@ -25,6 +25,9 @@ export class EmployeeService {
   getEmployeeById(id: string) {
     return this.http.get<Employees>(`http://localhost:3000/Employees/${id}`);
    }
+   getEmployeeByCode(code: number) {
+    return this.http.get<Employees>(`http://localhost:3000/Employees/?empCode=${code}`);
+   }
    update(data: Employees){
     return this.http.put(`http://localhost:3000/Employees/${data.id}`,data);
    }

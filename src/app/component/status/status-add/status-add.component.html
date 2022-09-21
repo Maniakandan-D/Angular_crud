@@ -3,17 +3,6 @@
   <div class="row">
     <div class="col-6">
       <div class="form-group">
-        <label for="statusCode">Status Code</label>
-        <div class="input-group">
-          <input type="text" class="form-control" formControlName="statusCode" name="statusCode" [(ngModel)]="myForm.statusCode" [class.is-invalid]="localForm.submitted && form.get('statusCode')?.invalid" autocomplete="off" />
-          <div class="invalid-feedback">
-            Status Code required
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-group">
         <label for="status">Status</label>
         <div class="input-group">
           <select type="dropdown" class="form-control" formControlName="status" name="status" [(ngModel)]="myForm.status" [class.is-invalid]="localForm.submitted && form.get('status')?.invalid" autocomplete="off">
