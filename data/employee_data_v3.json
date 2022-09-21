@@ -1131,13 +1131,6 @@
       "isEdit": false
     },
     {
-      "id": "6327e902fa7b5d3bc01c370b",
-      "designationCode": 1002,
-      "designation": "Software Architect",
-      "createdOn": "2022-09-19T09:28:58.z",
-      "modifiedOn": "2022-09-19T09:28:58 -06:-30"
-    },
-    {
       "id": "6327e9025618e9fa0f3bdc0b",
       "designationCode": 1003,
       "designation": "Network Engineer",
@@ -1156,6 +1149,14 @@
       "id": "6327e9029467592b9fb6d8cc",
       "designationCode": 1005,
       "designation": "Finance",
+      "createdOn": "2022-09-19T09:28:58.z",
+      "modifiedOn": "2022-09-19T09:28:58 -06:-30",
+      "isEdit": false
+    },
+    { 
+      "id": "NyunvIM7868",
+      "designationCode": "1002",
+      "designation": "Software Architect",
       "createdOn": "2022-09-19T09:28:58.z",
       "modifiedOn": "2022-09-19T09:28:58 -06:-30",
       "isEdit": false
@@ -1362,7 +1363,7 @@
     },
     {
       "id": "6327e9020bcc4c0ee7782796",
-      "empCode": 1010,
+      "empCode": "1010",
       "name": "Church Buckner",
       "email": "churchbuckner@ramjob.com",
       "designation": "Finance",

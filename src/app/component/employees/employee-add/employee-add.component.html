@@ -1,6 +1,6 @@
 <legend><b>Employee Details</b></legend>
 
-<form [formGroup]="form" (ngSubmit)="submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
+<form [formGroup]="form" (ngSubmit)="form.valid && submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
   <div class="row">
     <div class="col-6">
       <div class="form-group">

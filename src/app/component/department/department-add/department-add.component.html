@@ -4,17 +4,6 @@
     <div class="row">
       <div class="col-6">
         <div class="form-group">
-          <label for="departmentCode">Department Code</label>
-          <div class="input-group">
-            <input type="text" class="form-control" formControlName="departmentCode" name="departmentCode" [(ngModel)]="deptForm.departmentCode" [class.is-invalid]="localForm.submitted && form.get('departmentCode')?.invalid"  autocomplete="off" />
-            <div class="invalid-feedback">
-              Department code required
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="form-group">
           <label for="department">Department</label>
           <div class="input-group">
             <input type="text" class="form-control" formControlName="department" name="department" [(ngModel)]="deptForm.department" [class.is-invalid]="localForm.submitted && form.get('department')?.invalid" autocomplete="off"/>

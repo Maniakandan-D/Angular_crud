@@ -50,7 +50,6 @@
     <thead>
       <tr>
         <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
-        <th (click)="sort('statusCode')" scope="col-2">Status Code <i class="fas fa-sort"></i></th>
         <th (click)="sort('status')" scope="col-4">Status <i class="fas fa-sort"></i></th>
         <th scope="col-2"></th>
       </tr>
@@ -58,14 +57,6 @@
     <tbody>
       <tr *ngFor="let row of statusData |orderBy: key: reverse | filter: searchText | paginate:{itemsPerPage:pageSize,currentPage:page,totalItems:totalLength}; let i=index; let odd = odd"  [ngClass]="odd ? 'odd_col' : 'even_col'">
         <td><input type="checkbox" value="{{row.id}}" [(ngModel)]="statusData[i].checked"></td>
-        <td>
-          <div *ngIf="!row.isEdit">
-            {{row.statusCode}}
-          </div>
-          <div *ngIf="row.isEdit">
-            <input type="text" #statusCode="ngModel" required name="statusCode" [(ngModel)]="row.statusCode" class="form-control"/>
-          </div> 
-        </td>
         <td>
           <div *ngIf="!row.isEdit">
             {{row.status}}

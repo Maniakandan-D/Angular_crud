@@ -10,7 +10,6 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
   styleUrls: ['./employee-edit.component.css']
 })
 export class EmployeeEditComponent implements OnInit {
-  alert: boolean;
   employeeForm: Employees ={
     id: '',
     empCode: '',
@@ -56,7 +55,4 @@ export class EmployeeEditComponent implements OnInit {
   cancel(){
     this.router.navigate(['/employees']);
    }
-     closeAlert(){
-    this.alert = false;
-  }
 }

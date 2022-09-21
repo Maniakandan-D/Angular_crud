@@ -55,14 +55,13 @@ export class EmployeeAddComponent implements OnInit {
     this.getDepartment();
   }
   submitForm(){
-  if(this.form.get('empCode').value ==''){
-    this.notifyService.showError("Something went wrong")
-    return true;
-    
-  }
-  else
-  {
-    this.employeeService.addEmployee(this.employeeForm)
+    var empCode = this.form.get('empCode').value;
+    this.employeeService.getEmployeeByCode(empCode).
+    subscribe((data: any) =>{
+      if(data.length > 0){
+        this.notifyService.showWarning("Employee code is already exists");
+      }else{
+        this.employeeService.addEmployee(this.employeeForm)
     .subscribe({
       next: (data) =>{
         this.notifyService.showSuccess("Employee added successfully !!")
@@ -72,9 +71,9 @@ export class EmployeeAddComponent implements OnInit {
         console.log(err);
       }
     });
-    console.log(this.form.value)
+      }
+    });
     return true;
-  }
   }
   back(){
   this.router.navigate(['/employees']);
