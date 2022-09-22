@@ -26,6 +26,7 @@ jobs:
           npm install
           npm i -g json-server 
           npm start
+          dir
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
