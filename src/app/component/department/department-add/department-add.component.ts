@@ -19,6 +19,7 @@ export class DepartmentAddComponent implements OnInit {
     private router:Router, private formBuilder: FormBuilder,
     private notifyService : AlertService) {  }
 
+
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       department: [ '', [Validators.required]
@@ -28,30 +29,27 @@ export class DepartmentAddComponent implements OnInit {
 
 
   submitForm(){
-    
-    var department = this.form.get('department').value;
-    
-    this.departmentService.getDepartmentByName(department).subscribe((data:any)=>{
+      var department = this.form.get('department').value;
+
+      this.departmentService.getDepartmentByName(department).subscribe((data:any)=>{
 
       if(data.length > 0)
       {
-     this.notifyService.showWarning("Department name already exists")
+          this.notifyService.showWarning("Department name already exists")
       }
       else
       {
-      this.departmentService.addDepartment(this.deptForm)
-      .subscribe({
-        next:(data) => {
+          this.departmentService.addDepartment(this.deptForm)
+          .subscribe({
+          next:(data) => {
           this.notifyService.showSuccess("Department added successfully !!")
           this.router.navigate(["/department"])
-        },
-      }); 
-    }
-});
- return true;  
-
-    }
-
+           },
+          }); 
+      }
+  });
+  return true; 
+  }
   back(){
     this.router.navigate(['/department']);
    }

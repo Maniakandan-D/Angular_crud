@@ -18,13 +18,17 @@ export class DepartmentViewComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     this.departmentService.getDetails(this.id)
-    .subscribe(data => {
+    .subscribe({
+      next: data => {
       this.departments = data;
-    }, error => console.log(error));
-  }
+    }, 
+    error: error => console.log(error)});
+    }
+
   departmentDetails(id: string){
-    this.router.navigate(['department/department-view', id])
-   }
+      this.router.navigate(['department/department-view', id])
+    }
+
    list(){
     this.router.navigate(['/department']);
    }

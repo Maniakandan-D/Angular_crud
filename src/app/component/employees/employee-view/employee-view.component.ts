@@ -20,14 +20,17 @@ export class EmployeeViewComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     this.employeeService.getDetails(this.id)
-    .subscribe(data => {
-      this.employees = data;
-    }, error => console.log(error));
+    .subscribe({ 
+      next:data => {
+        this.employees = data;
+      },error: error => console.log(error)
+    });
   }
   
  employeeDetails(id: number){
-  this.router.navigate(['employees/employee-view', id])
+    this.router.navigate(['employees/employee-view', id])
  }
+
  list(){
   this.router.navigate(['/employees']);
  }

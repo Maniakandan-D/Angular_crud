@@ -30,37 +30,42 @@ export class StatusComponent implements OnInit {
   ngOnInit(): void {
     this.getStatus();
   }
+
   getStatus() {
     this.statusService.getStatus().subscribe((data) => {
       this.statusData = data;
     });
   }
+
   deleteStatus(row : any){
     // add confirmation before deleting 
     if (confirm("Are you sure to delete ?")){
-    this.statusService.deleteStatus(row.id)
-    .subscribe(res => { 
-      const index: number = this.statusData.indexOf(row);
-      if (index !== -1) {
+      this.statusService.deleteStatus(row.id)
+      .subscribe(res => { 
+        const index: number = this.statusData.indexOf(row);
+        if (index !== -1) {
           this.statusData.splice(index, 1)
           this.notifyService.showSuccess("Status deleted successfully");
-      }    
-    });
-   }
+        }    
+      });
+    }
   }
 
    //sorting
    sort(key){
     this.key = key;
     this.reverse = !this.reverse;
- }
+  }
+
   // Multiple delete
   checkAllCheckBox(ev: any) {
 		this.statusData.forEach(x => x.checked = ev.target.checked)
 	}
+
   isAllCheckBoxChecked() {
 		return this.statusData.every(row => row.checked);
 	}
+
   deleteMultiStatus(): void {
 		const selectedStatus= this.statusData.
     filter(employee => employee.checked).map(row => row.id);
@@ -69,67 +74,69 @@ export class StatusComponent implements OnInit {
 		
 			selectedStatus.forEach(id => {
 				this.statusService.deleteMultiStatus(id)
-				.subscribe(res => {
-					this.clss = 'grn';
-					this.msg = 'Status successfully deleted';
-					}, err => {
-                        this.clss = 'rd';
+				.subscribe({
+          next:res => {
+					  this.clss = 'grn';
+					  this.msg = 'Status successfully deleted';
+					}, 
+          error: err => {
+            this.clss = 'rd';
 						this.msg = 'Something went wrong during deleting status';
-                    }
-                );
-		});		
+          }
+        });
+		  });		
 		} else {
-			this.clss = 'rd';
-			this.msg = 'You must select at least one status';
-		}
-		this.getStatus();
+			  this.clss = 'rd';
+			  this.msg = 'You must select at least one status';
+		  }
+		  this.getStatus();
 	}
    // inlineEdit
    addStatus(){
     this.statusData['isEdit'] = true;
   }
+
   getstatus(){
     this.isLoader = false;
-    this.statusService.getStatus().subscribe((res: any) => {
-     debugger;
-     this.statusData = res;
-     this.statusData.forEach(element => {
-      element['isEdit'] = false;
-     });
-     this.isLoader = false;
-    },error => {
-    this.isLoader = false;
+    this.statusService.getStatus().subscribe({
+      next:(res: any) => {
+      debugger;
+        this.statusData = res;
+        this.statusData.forEach(element => {
+        element['isEdit'] = false;
+        });
+        this.isLoader = false;
+      },error:error => {
+      this.isLoader = false;
+      }
     });
   }
+
   cancel(data){
-    
     data.isEdit = false;
   }
+
   getStatusId(data){
    data.isEdit = true;
    this.statusData;
   }
+
   update(rowData){
-
-    //check row data has changed
-    
-   //validate
-   this.statusService
-       .getStatusByName(rowData.status)
-        .subscribe((data: any)=>{
-
-          if(data.length ==0)
+  //check row data has changed
+  //validate
+    this.statusService.getStatusByName(rowData.status)
+    .subscribe((data: any)=>{
+        if(data.length ==0)
           {
-                rowData.isEdit = false;
-                this.statusService.updateStatus(rowData).subscribe((updatedData)=>{});
-                this.notifyService.showSuccess("status updated successfully")      
+            rowData.isEdit = false;
+              this.statusService.updateStatus(rowData).subscribe((updatedData)=>{});
+              this.notifyService.showSuccess("status updated successfully")      
           }
           else
           {
-                this.notifyService.showError(`status name ${{name}} already exists..!`)
+              this.notifyService.showError(`status name  already exists..!`)
           }
-    });
+      });
    //call update service
-  
   }
 }
