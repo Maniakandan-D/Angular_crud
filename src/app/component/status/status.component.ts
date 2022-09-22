@@ -122,8 +122,8 @@ export class StatusComponent implements OnInit {
   }
 
   update(rowData){
-    //check row data has changed
-   //validate
+  //check row data has changed
+  //validate
     this.statusService.getStatusByName(rowData.status)
     .subscribe((data: any)=>{
         if(data.length ==0)
