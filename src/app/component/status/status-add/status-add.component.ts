@@ -24,7 +24,7 @@ export class StatusAddComponent implements OnInit {
     }, {updateOn: 'change' });
   }
   submitForm(){
-    if(this.form.get('statusCode').value ==''){
+    if(this.form.get('status').value ==''){
       this.notifyService.showError("Something went wrong");
       return true;   
     }
