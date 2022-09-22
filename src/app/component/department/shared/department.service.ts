@@ -16,29 +16,37 @@ export class DepartmentService {
   getDepartment() {
     return this.http.get<Department[]>(this.url);
   }
+
   addDepartment(data: Department) {
     return this.http.post<Department>('http://localhost:3000/Departments', data);
   }
+
   getDepartmentById(id: string) {
     return this.http.get<Department>(`http://localhost:3000/Departments/${id}`);
-   }
-   getDepartmentByName(name: string) {
+  }
+
+  getDepartmentByName(name: string) {
     return this.http.get<Department>(`http://localhost:3000/Departments/?department=${name}`);
-   }
-   update(data: Department){
+  }
+
+  update(data: Department){
     return this.http.put(`http://localhost:3000/Departments/${data.id}`,data);
-   }
-   delete(id:string){
-    return this.http.delete<Department>(`http://localhost:3000/Departments/${id}`).pipe(map((res: any ) =>{
+  }
+
+  delete(id:string){
+    return this.http.delete<Department>(`http://localhost:3000/Departments/${id}`).
+    pipe(map((res: any ) =>{
       return res
     }));
- }
- getDetails(id: string){
-  return this.http.get<Department>(`http://localhost:3000/Departments/${id}`);
- }
+  }
+
+  getDetails(id: string){
+    return this.http.get<Department>(`http://localhost:3000/Departments/${id}`);
+  }
+
  //MultipleDelete
- deleteMultiDepartment(id : string){
-  return this.http.delete<any>(`http://localhost:3000/Departments/${id}`).pipe(map((res: any ) =>{
+  deleteMultiDepartment(id : string){
+    return this.http.delete<any>(`http://localhost:3000/Departments/${id}`).pipe(map((res: any ) =>{
     return res
   }));
 }

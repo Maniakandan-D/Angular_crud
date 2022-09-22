@@ -32,11 +32,13 @@ export class EmployeeEditComponent implements OnInit {
       this.getEmployeeById(id);
     });
   }
+
   getEmployeeById(id: string) {
     this.employeeService.getEmployeeById(id).subscribe((data) => {
       this.employeeForm = data;
     });
   }
+
   update() {
     this.employeeService.update(this.employeeForm)
     .subscribe({
@@ -52,6 +54,7 @@ export class EmployeeEditComponent implements OnInit {
       }
     })
   }
+  
   cancel(){
     this.router.navigate(['/employees']);
    }

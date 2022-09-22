@@ -58,26 +58,30 @@ export class EmployeeAddComponent implements OnInit {
     var empCode = this.form.get('empCode').value;
     this.employeeService.getEmployeeByCode(empCode).
     subscribe((data: any) =>{
+
       if(data.length > 0){
         this.notifyService.showWarning("Employee code is already exists");
-      }else{
+      }
+      else{
         this.employeeService.addEmployee(this.employeeForm)
-    .subscribe({
-      next: (data) =>{
-        this.notifyService.showSuccess("Employee added successfully !!")
-        this.router.navigate(['/employees']);
-      },
-      error: (err) =>{
-        console.log(err);
+        .subscribe({
+          next: (data) =>{
+            this.notifyService.showSuccess("Employee added successfully !!")
+            this.router.navigate(['/employees']);
+          },
+          error: (err) =>{
+          console.log(err);
+          }
+        });
       }
     });
-      }
-    });
-    return true;
+      return true;
   }
+
   back(){
-  this.router.navigate(['/employees']);
+    this.router.navigate(['/employees']);
   }
+
 // Designation 
   getDesignation(){
     this.designationService.getDesignation()
@@ -85,11 +89,12 @@ export class EmployeeAddComponent implements OnInit {
       this.designation = data;
     });
   }
+
   // Department
   getDepartment(){
     this.departmentService.getDepartment()
     .subscribe(data => {
-     this.department = data;
+      this.department = data;
     });
   }
 }

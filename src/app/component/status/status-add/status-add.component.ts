@@ -23,6 +23,7 @@ export class StatusAddComponent implements OnInit {
       status: this.formBuilder.control ('', Validators.required),
     }, {updateOn: 'change' });
   }
+
   submitForm(){
     if(this.form.get('status').value ==''){
       this.notifyService.showError("Something went wrong");
@@ -41,7 +42,8 @@ export class StatusAddComponent implements OnInit {
       console.log(this.form.value)
       return true;
     }
-    }
+  }
+  
   back(){
     this.router.navigate(['/status']);
    }
