@@ -7,20 +7,21 @@ import { ToastrService } from 'ngx-toastr';
 export class AlertService {
 
   constructor(private toastr: ToastrService) { }
+  
   showSuccess(message){
     this.toastr.success(message)
-}
+  }
  
-showError(message){
+  showError(message){
     this.toastr.error(message)
-}
+  }
  
-showInfo(message){
+  showInfo(message){
     this.toastr.info(message)
-}
+  }
  
-showWarning(message){
+  showWarning(message){
     this.toastr.warning(message)
-}
+  }
 
 }
