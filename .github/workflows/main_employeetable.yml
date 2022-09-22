@@ -24,7 +24,7 @@ jobs:
       - name: npm install, ng serve, and run json server
         run: |
           npm install
-          ng serve
+          npm start
           json-server --watch data/employee_data_v3.json
       
       - name: Upload artifact for deployment job
