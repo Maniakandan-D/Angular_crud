@@ -24,27 +24,28 @@ export class StatusAddComponent implements OnInit {
     }, {updateOn: 'change' });
   }
 
-  submitForm(){
-    if(this.form.get('status').value ==''){
-      this.notifyService.showError("Something went wrong");
-      return true;   
-    }
+  submitForm(): boolean{
+    var name = this.form.get('status').value;
+    this.statusService.getByName(name).subscribe((data: any) => {
+      if (data.length > 0) {
+        this.notifyService.showWarning(`Status  ${name} already exists`)
+      }
     else
     {
       this.myForm.createdOn = this.myForm.modifiedOn = new Date();
-      this.statusService.addStatus(this.myForm)
+      this.statusService.add(this.myForm)
       .subscribe({
-        next: (data) =>{
+        next: (data: any) =>{
           this.notifyService.showSuccess("Status added successfully");
           this.router.navigate(['/status']);
         },
-      });
-      console.log(this.form.value)
+      })
+    }
+    });
       return true;
     }
-  }
   
-  back(){
+  back(): void{
     this.router.navigate(['/status']);
    }
 }

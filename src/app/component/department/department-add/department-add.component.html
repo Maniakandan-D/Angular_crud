@@ -1,14 +1,13 @@
-
-  <legend>Department Details</legend>
+  <h2>Add</h2>
   <form [formGroup]="form" (ngSubmit)="form.valid && submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
     <div class="row">
       <div class="col-6">
         <div class="form-group">
           <label for="department">Department</label>
           <div class="input-group">
-            <input type="text" class="form-control" formControlName="department" name="department" [(ngModel)]="deptForm.department" [class.is-invalid]="localForm.submitted && form.get('department')?.invalid" autocomplete="off"/>
+            <input type="text" class="form-control" formControlName="department" name="department" [(ngModel)]="deptForm.name" [class.is-invalid]="localForm.submitted && form.get('department')?.invalid" autocomplete="off"/>
             <div class="invalid-feedback">
-              Department required
+              Department is required
             </div>
           </div>
         </div>

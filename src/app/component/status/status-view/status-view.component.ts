@@ -14,22 +14,20 @@ export class StatusViewComponent implements OnInit {
   constructor(private route: ActivatedRoute, private statusService: StatusService, private router: Router) { }
 
   ngOnInit(): void {
-
     this.Status = new Status();
     this.id = this.route.snapshot.params['id'];
-
-    this.statusService.getStatusDetails(this.id)
+    this.statusService.getById(this.id)
     .subscribe({
       next:data => {
         this.Status= data;
       },error: error => console.log(error)});
   }
 
-  statusDetails(id: string){
+  statusDetails(id: string): void{
     this.router.navigate(['status/status-view', id])
    }
 
-   list(){
+   back(): void{
       this.router.navigate(['/status']);
    }
 }

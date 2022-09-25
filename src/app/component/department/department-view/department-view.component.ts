@@ -10,26 +10,26 @@ import { Department } from '../shared/department.model';
 })
 export class DepartmentViewComponent implements OnInit {
   id: string;
-  departments: Department;
+  departmentData: Department;
+  
   constructor(private route: ActivatedRoute, private departmentService: DepartmentService, private router: Router) { }
 
   ngOnInit(): void {
-    this.departments = new Department();
+    this.departmentData = new Department();
     this.id = this.route.snapshot.params['id'];
-
-    this.departmentService.getDetails(this.id)
+    this.departmentService.getById(this.id)
     .subscribe({
       next: data => {
-      this.departments = data;
-    }, 
-    error: error => console.log(error)});
+      this.departmentData = data;
     }
+  });
+  }
 
-  departmentDetails(id: string){
+  departmentDetails(id: string): void{
       this.router.navigate(['department/department-view', id])
     }
 
-   list(){
+   back(): void{
     this.router.navigate(['/department']);
    }
 }

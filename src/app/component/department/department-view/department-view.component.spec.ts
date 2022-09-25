@@ -1,14 +1,27 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { DepartmentService } from '../shared/department.service';
 
 import { DepartmentViewComponent } from './department-view.component';
 
-describe('DepartmentViewComponent', () => {
+fdescribe('DepartmentViewComponent', () => {
   let component: DepartmentViewComponent;
   let fixture: ComponentFixture<DepartmentViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DepartmentViewComponent ]
+      imports:[
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+        FormsModule
+      ],
+      declarations: [ DepartmentViewComponent ],
+      providers:[
+        DepartmentService,
+      ]
     })
     .compileComponents();
   });

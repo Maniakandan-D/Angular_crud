@@ -13,7 +13,7 @@
                   Action
               </a>
               <div class="dropdown-menu">
-                  <a class="dropdown-item" (click)="deleteMultiEmployees()">Delete</a>
+                  <button class="dropdown-item" (click)="deleteMultiEmployees()">Delete</button>
               </div>
           </li>
           <li class="nav-item btn-group dropright">
@@ -28,26 +28,22 @@
               </div>
           </li>
         </ul>
-        <ul>
-          <div *ngIf="msg" [ngClass]="clss">{{msg}}</div>
-        </ul>
         <ul class="navbar nav ml-auto">
           <li class="nav-item">
-              <button type="button" class="btn btn-success" routerLink="/employees/emplyee-add"><i class="fas fa-plus"></i> Add</button>
+              <button type="button" class="btn btn-success" routerLink="/employees/add"><i class="fas fa-plus"></i> Add</button>
           </li>
           <li class="nav-item btn-group">
               <button type="button" class="btn btn-info dropdown-toggle mx-3" data-toggle="dropdown" aria-expanded="false">
                   Export
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Login</a>
-                <a class="dropdown-item" href="#">Profile</a>
                 <a class="dropdown-item" href="#">Logout</a>
             </div>
           </li>
         </ul>
       </div>
   </nav>
+  
   <table class="table mt-3">
       <thead>
         <tr>
@@ -76,7 +72,7 @@
           <td>{{row.salary}}</td>
           <td>
             <a [routerLink]="['/employees/employee-view', row.id]" class="mx-1"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-            <a [routerLink]="['/employees/employee-edit', row.id]" class="mx-1"><i class="fas fa-pencil-alt"></i></a>
+            <a [routerLink]="['/employees/edit/', row.id]" class="mx-1"><i class="fas fa-pencil-alt"></i></a>
             <a (click)="deleteEmployee(row)" class="mx-1"><i class="fas fa-trash"></i></a>
           </td>
         </tr>
@@ -84,7 +80,6 @@
   </table>
 </div>
 
- 
  <!-- pagination -->
 <div class="pagination">
   <label class="col-md ml-auto">Select Page</label>

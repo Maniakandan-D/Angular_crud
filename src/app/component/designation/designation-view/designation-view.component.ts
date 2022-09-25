@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alertService/alert.service';
 import { Designation } from '../shared/designation.model';
 import { DesignationService } from '../shared/designation.service';
 
@@ -9,30 +10,31 @@ import { DesignationService } from '../shared/designation.service';
   styleUrls: ['./designation-view.component.css']
 })
 export class DesignationViewComponent implements OnInit {
-
   id: string;
-  designations: Designation;
+  designationData: Designation;
 
-  constructor(private route: ActivatedRoute, private designationService: DesignationService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private designationService: DesignationService, 
+    private router: Router, private notifyService: AlertService) { }
 
   ngOnInit(): void {
-
-    this.designations = new Designation();
+    this.designationData = new Designation();
     this.id = this.route.snapshot.params['id'];
-
-    this.designationService.getDesignationDetails(this.id)
+    this.designationService.getById(this.id)
     .subscribe({
       next: data => {
-      this.designations = data;
+      this.designationData = data;
     }, 
-      error: error => console.log(error)});
+      error: error => {
+        this.notifyService.showError("Something went wrong during designation view")
+      }
+    });
   }
 
-  designationDetails(id: string){
+  designationDetails(id: string): void{
       this.router.navigate(['designation/designation-view', id])
   }
 
-  list(){
+  back(): void{
     this.router.navigate(['/designation']);
   }
 }

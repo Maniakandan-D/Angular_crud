@@ -8,34 +8,35 @@ import { DepartmentService } from '../../department/shared/department.service';
 import { DesignationService } from '../../designation/shared/designation.service';
 import { EmployeeService } from '../shared/employee.service';
 
-import { EmployeeAddComponent } from './employee-add.component';
+import { AddEditComponent } from './add-edit.component';
 
-fdescribe('EmployeeAddComponent', () => {
-  let component: EmployeeAddComponent;
-  let fixture: ComponentFixture<EmployeeAddComponent>;
+fdescribe('AddEditComponent', () => {
+  let component: AddEditComponent;
+  let fixture: ComponentFixture<AddEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports:[
         HttpClientTestingModule,
-        ReactiveFormsModule,
         RouterTestingModule,
+        ReactiveFormsModule,
         FormsModule,
         ToastrModule.forRoot()
       ],
-      declarations: [ EmployeeAddComponent ],
+      declarations: [ AddEditComponent ],
       providers:[
-        EmployeeService,
         DepartmentService,
         DesignationService,
-        AlertService
+        AlertService,
+        EmployeeService,
+
       ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmployeeAddComponent);
+    fixture = TestBed.createComponent(AddEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,14 +1,11 @@
 <legend>Status Details</legend>
-<form [formGroup]="form" (ngSubmit)="submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
+<form [formGroup]="form" (ngSubmit)="form.valid && submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
   <div class="row">
     <div class="col-6">
       <div class="form-group">
         <label for="status">Status</label>
         <div class="input-group">
-          <select type="dropdown" class="form-control" formControlName="status" name="status" [(ngModel)]="myForm.status" [class.is-invalid]="localForm.submitted && form.get('status')?.invalid" autocomplete="off">
-            <option>Confirmed</option>
-            <option>Probation</option>
-          </select>
+          <input type="text" class="form-control" formControlName="status" name="status" [(ngModel)]="myForm.name" [class.is-invalid]="localForm.submitted && form.get('status')?.invalid" autocomplete="off"/>
           <div class="invalid-feedback">
             Status required
           </div>

@@ -1,9 +1,9 @@
 <h2> Designation Details </h2>
 
     <hr/>
-    <div *ngIf="designations">
+    <div *ngIf="designationData">
         <div>
-            <label><b>Designation:  </b></label>{{designations.designation}}
+            <label><b>Designation:  </b></label>{{designationData.name}}
         </div>
     </div>
-    <button (click)="list()" class="btn btn-secondary">Back</button>
+    <button (click)="back()" class="btn btn-secondary">Back</button>

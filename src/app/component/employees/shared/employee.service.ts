@@ -1,50 +1,37 @@
 import { Injectable } from '@angular/core';
-import{ HttpClient, HttpHeaders } from '@angular/common/http';
-import { Employees } from './employee.model';
+import{ HttpClient } from '@angular/common/http';
+import { Employee } from './employee.model';
 import { map } from 'rxjs/operators';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class EmployeeService {
 
   constructor(private http: HttpClient) { }
+  apiEndpoint: string  = environment.BackendApiEndpointEmployee;
 
-  url: string = 'http://localhost:3000/Employees';
-
-  getEmployee() {
-    return this.http.get<Employees[]>(this.url);
+  getAll(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.apiEndpoint}`);
   }
-  addEmployee(data: Employees) {
-    return this.http.post<Employees>('http://localhost:3000/Employees', data);
+  add(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(`${this.apiEndpoint}`, employee);
   }
-  getEmployeeById(id: string) {
-    return this.http.get<Employees>(`http://localhost:3000/Employees/${id}`);
+  getById(id: string): Observable<Employee> {
+    return this.http.get<Employee>(`${this.apiEndpoint}/${id}`);
    }
-   getEmployeeByCode(code: number) {
-    return this.http.get<Employees>(`http://localhost:3000/Employees/?empCode=${code}`);
+   getByCode(code: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.apiEndpoint}/?empCode=${code}`);
    }
-   update(data: Employees){
-    return this.http.put(`http://localhost:3000/Employees/${data.id}`,data);
+   update(id: string ,data: Employee): any{
+    return this.http.put(`${this.apiEndpoint}/${id}`, data);
    }
-   delete(id:string){
-    return this.http.delete<Employees>(`http://localhost:3000/Employees/${id}`).pipe(map((res: any ) =>{
+   delete(id:string): Observable<Employee>{
+    return this.http.delete<Employee>(`${this.apiEndpoint}/${id}`).pipe(map((res: any ) =>{
       return res
     }));
  }
- getDetails(id: string){
-  return this.http.get<Employees>(`http://localhost:3000/Employees/${id}`);
- }
- //MultipleDelete
- deleteEmployees(id : string){
-  return this.http.delete<any>(`http://localhost:3000/Employees/${id}`).pipe(map((res: any ) =>{
-    return res
-  }));
-}
-
-
 }

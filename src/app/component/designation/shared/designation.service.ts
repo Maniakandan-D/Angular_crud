@@ -2,48 +2,40 @@ import { Injectable } from '@angular/core';
 import{ HttpClient } from '@angular/common/http';
 import { Designation } from './designation.model';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DesignationService {
-  
   constructor(private http: HttpClient) { }
+  apiEndpoint: string  = environment.BackendApiEndpointDesign;
 
-  url: string = 'http://localhost:3000/Designation';
-
-  getDesignation() {
-    return this.http.get<Designation[]>(this.url);
-  }
-  addDesignation(data: Designation) {
-    return this.http.post<Designation>('http://localhost:3000/Designation', data);
-  }
-  getDesignationById(id: string) {
-    return this.http.get<Designation>(`http://localhost:3000/Designation/${id}`);
+  getAll() : Observable<Designation[]>{
+    return this.http.get<Designation[]>(`${this.apiEndpoint}`);
   }
 
-  getDesignationByName(name: string) {
-    return this.http.get<Designation>(`http://localhost:3000/Designation/?designation=${name}`);
+  add(designation: Designation): Observable<Designation> {
+    return this.http.post<Designation>(`${this.apiEndpoint}`, designation);
   }
 
-  updateDesignation(data: Designation){
-    return this.http.put(`http://localhost:3000/Designation/${data.id}`,data);
+  getById(id: string): Observable<Designation> {
+    return this.http.get<Designation>(`${this.apiEndpoint}/${id}`);
   }
 
-  deleteDesignation(id:string){
-    return this.http.delete<Designation>(`http://localhost:3000/Designation/${id}`).pipe(map((res: any ) =>{
+  getByName(name: string): Observable<Designation> {
+    return this.http.get<Designation>(`${this.apiEndpoint}/?name=${name}`);
+  }
+
+  update(data: Designation): any{
+    return this.http.put(`${this.apiEndpoint}/${data.id}`,data);
+  }
+
+  delete(id:string): Observable<Designation>{
+    return this.http.delete<Designation>(`${this.apiEndpoint}/${id}`).pipe(map((res: any ) =>{
       return res
     }));
  }
-
-  getDesignationDetails(id: string){
-  return this.http.get<Designation>(`http://localhost:3000/Designation/${id}`);
-  }
-
-  //MultipleDelete
-  deleteMultiDesignation(id : string){
-    return this.http.delete<any>(`http://localhost:3000/Designation/${id}`).pipe(map((res: any ) =>{
-      return res
-    }));
-  }
 }

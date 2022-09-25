@@ -1,14 +1,14 @@
 
-  <legend>Designation Details</legend>
+  <h2>Add</h2>
   <form [formGroup]="form" (ngSubmit)="form.valid && submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
     <div class="row">
       <div class="col-6">
         <div class="form-group">
-          <label for="designation">Designation</label>
+          <label for="name">Designation</label>
           <div class="input-group">
-            <input type="text" class="form-control" formControlName="designation" name="designation" [(ngModel)]="myForm.designation" [class.is-invalid]="localForm.submitted && form.get('designation')?.invalid" autocomplete="off" />
+            <input type="text" class="form-control" formControlName="name" name="name" [(ngModel)]="myForm.name" [class.is-invalid]="localForm.submitted && form.get('name')?.invalid" autocomplete="off" />
             <div class="invalid-feedback">
-              Designation required
+              Designation is required
             </div>
           </div>
         </div>

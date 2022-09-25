@@ -22,25 +22,21 @@ export class StatusComponent implements OnInit {
   key: string = 'id';
   reverse: boolean = false;
 
-  msg: string = '';
-  clss: string = '';
-
   constructor(private statusService: StatusService,  private notifyService : AlertService) { this.isLoader = true; }
 
   ngOnInit(): void {
     this.getStatus();
   }
 
-  getStatus() {
-    this.statusService.getStatus().subscribe((data) => {
+  getStatus(): void {
+    this.statusService.getAll().subscribe((data) => {
       this.statusData = data;
     });
   }
 
-  deleteStatus(row : any){
-    // add confirmation before deleting 
+  deleteStatus(row : any): void{
     if (confirm("Are you sure to delete ?")){
-      this.statusService.deleteStatus(row.id)
+      this.statusService.delete(row.id)
       .subscribe(res => { 
         const index: number = this.statusData.indexOf(row);
         if (index !== -1) {
@@ -51,54 +47,48 @@ export class StatusComponent implements OnInit {
     }
   }
 
-   //sorting
-   sort(key){
+   sort(key: string): void{
     this.key = key;
     this.reverse = !this.reverse;
   }
 
-  // Multiple delete
-  checkAllCheckBox(ev: any) {
+  checkAllCheckBox(ev: any): void {
 		this.statusData.forEach(x => x.checked = ev.target.checked)
 	}
 
-  isAllCheckBoxChecked() {
+  isAllCheckBoxChecked(): boolean{
 		return this.statusData.every(row => row.checked);
 	}
 
   deleteMultiStatus(): void {
 		const selectedStatus= this.statusData.
     filter(employee => employee.checked).map(row => row.id);
-	
 		if(selectedStatus && selectedStatus.length > 0) {
-		
 			selectedStatus.forEach(id => {
-				this.statusService.deleteMultiStatus(id)
+				this.statusService.delete(id)
 				.subscribe({
           next:res => {
-					  this.clss = 'grn';
-					  this.msg = 'Status successfully deleted';
+					  this.notifyService.showSuccess("Status successfully deleted");
 					}, 
           error: err => {
-            this.clss = 'rd';
-						this.msg = 'Something went wrong during deleting status';
+            this.notifyService.showError("Something went wrong during deleting status");
           }
         });
 		  });		
 		} else {
-			  this.clss = 'rd';
-			  this.msg = 'You must select at least one status';
+			  this.notifyService.showWarning("You must select at least one status");
 		  }
 		  this.getStatus();
 	}
+
    // inlineEdit
-   addStatus(){
+   addStatus(): void{
     this.statusData['isEdit'] = true;
   }
 
-  getstatus(){
+  getstatus(): void{
     this.isLoader = false;
-    this.statusService.getStatus().subscribe({
+    this.statusService.getAll().subscribe({
       next:(res: any) => {
       debugger;
         this.statusData = res;
@@ -107,36 +97,33 @@ export class StatusComponent implements OnInit {
         });
         this.isLoader = false;
       },error:error => {
-      this.isLoader = false;
+        this.isLoader = false;
       }
     });
   }
 
-  cancel(data){
+  cancel(data: { isEdit: boolean; }): void{
     data.isEdit = false;
   }
 
-  getStatusId(data){
+  getStatusId(data: { isEdit: boolean; }): void{
    data.isEdit = true;
    this.statusData;
   }
 
-  update(rowData){
-  //check row data has changed
-  //validate
-    this.statusService.getStatusByName(rowData.status)
+  update(rowData: any): void{
+    this.statusService.getByName(rowData.status)
     .subscribe((data: any)=>{
         if(data.length ==0)
           {
             rowData.isEdit = false;
-              this.statusService.updateStatus(rowData).subscribe((updatedData)=>{});
-              this.notifyService.showSuccess("status updated successfully")      
-          }
+            this.statusService.update(rowData).subscribe((updatedData: any)=>{});
+            this.notifyService.showSuccess("status updated successfully")      
+        }
           else
           {
-              this.notifyService.showError(`status name  already exists..!`)
+            this.notifyService.showError(`status name  already exists..!`)
           }
       });
-   //call update service
   }
 }

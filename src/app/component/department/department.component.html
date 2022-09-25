@@ -12,7 +12,7 @@
                 Action
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" (click)="deleteSelectedDepartment()">Delate</a>
+                <button class="dropdown-item" (click)="deleteSelectedDepartment()">Delate</button>
             </div>
         </li>
         <li class="nav-item btn-group dropright">
@@ -26,9 +26,6 @@
               </form>
             </div>
         </li>
-      </ul>
-      <ul>
-        <div *ngIf="msg" [ngClass]="clss">{{msg}}</div>
       </ul>
       <ul class="navbar nav ml-auto">
         <li class="nav-item">
@@ -50,7 +47,7 @@
     <thead>
       <tr>
         <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
-        <th (click)="sort('department')" scope="col-4">Department <i class="fas fa-sort"></i></th>
+        <th (click)="sort('name')" scope="col-4">Department <i class="fas fa-sort"></i></th>
         <th scope="col-2"></th>
       </tr>
     </thead>
@@ -59,10 +56,10 @@
         <td><input type="checkbox" value="{{row.id}}" [(ngModel)]="departmentData[i].checked"></td>
         <td>
           <div *ngIf="!row.isEdit">
-            {{row.department}}
+            {{row.name}}
           </div>
           <div *ngIf="row.isEdit" novalidate>
-            <input type="text" #department="ngModel" required name="department" [(ngModel)]="row.department" class="form-control"/>
+            <input type="text" #department="ngModel" required name="department" [(ngModel)]="row.name" class="form-control"/>
           </div> 
         </td>
         <td>

@@ -2,52 +2,42 @@ import { Injectable } from '@angular/core';
 import{ HttpClient } from '@angular/common/http';
 import { Department } from './department.model';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DepartmentService {
-   
+  
   constructor(private http: HttpClient) { }
+  apiEndpoint: string  = environment.BackendApiEndpointDept;
 
-  url: string = 'http://localhost:3000/Departments';
-
-  getDepartment() {
-    return this.http.get<Department[]>(this.url);
+  getAll(): Observable<Department[]> {
+    return this.http.get<Department[]>(`${this.apiEndpoint}`);
   }
 
-  addDepartment(data: Department) {
-    return this.http.post<Department>('http://localhost:3000/Departments', data);
+  add(department: Department): Observable<Department> {
+    return this.http.post<Department>(`${this.apiEndpoint}`, department);
   }
 
-  getDepartmentById(id: string) {
-    return this.http.get<Department>(`http://localhost:3000/Departments/${id}`);
+  getById(id: string): Observable<Department> {
+    return this.http.get<Department>(`${this.apiEndpoint}/${id}`);
   }
 
-  getDepartmentByName(name: string) {
-    return this.http.get<Department>(`http://localhost:3000/Departments/?department=${name}`);
+  getByName(name: string): Observable<Department> {
+    return this.http.get<Department>(`${this.apiEndpoint}/?name=${name}`);
   }
 
-  update(data: Department){
-    return this.http.put(`http://localhost:3000/Departments/${data.id}`,data);
+  update(data: Department): any{
+    return this.http.put(`${this.apiEndpoint}/${data.id}`,data);
   }
 
-  delete(id:string){
-    return this.http.delete<Department>(`http://localhost:3000/Departments/${id}`).
+  delete(id:string): Observable<Department>{
+    return this.http.delete<Department>(`${this.apiEndpoint}/${id}`).
     pipe(map((res: any ) =>{
       return res
     }));
   }
-
-  getDetails(id: string){
-    return this.http.get<Department>(`http://localhost:3000/Departments/${id}`);
-  }
-
- //MultipleDelete
-  deleteMultiDepartment(id : string){
-    return this.http.delete<any>(`http://localhost:3000/Departments/${id}`).pipe(map((res: any ) =>{
-    return res
-  }));
-}
 }

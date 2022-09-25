@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmployeeService } from '../shared/employee.service';
-import { Employees } from '../shared/employee.model';
+import { Employee } from '../shared/employee.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Designation } from '../../designation/shared/designation.model';
 import { DesignationService } from '../../designation/shared/designation.service';
@@ -16,11 +16,11 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
   styleUrls: ['./employee-add.component.css']
 })
 export class EmployeeAddComponent implements OnInit {
-
+  form!: FormGroup;
  designation: Designation[] = [];
  department : Department [] = [];
 
-  employeeForm: Employees = {
+  employeeForm: Employee = {
     id: '',
     empCode: '',
     name: '',
@@ -32,12 +32,9 @@ export class EmployeeAddComponent implements OnInit {
     salary: ''
   };
 
-  form!: FormGroup;
-
-
   constructor(private employeeService: EmployeeService,
     private router:Router, private formBuilder: FormBuilder, private designationService: DesignationService
-    , private departmentService: DepartmentService, private notifyService : AlertService) { }
+    ,private departmentService: DepartmentService, private notifyService : AlertService) { }
 
   ngOnInit(): void {
       this.form = this.formBuilder.group({
@@ -54,22 +51,22 @@ export class EmployeeAddComponent implements OnInit {
     this.getDesignation();
     this.getDepartment();
   }
-  submitForm(){
-    var empCode = this.form.get('empCode').value;
-    this.employeeService.getEmployeeByCode(empCode).
-    subscribe((data: any) =>{
 
+  submitForm(): boolean{
+    var empCode = this.form.get('empCode').value;
+    this.employeeService.getByCode(empCode).
+    subscribe((data: any) =>{
       if(data.length > 0){
         this.notifyService.showWarning("Employee code is already exists");
       }
       else{
-        this.employeeService.addEmployee(this.employeeForm)
+        this.employeeService.add(this.employeeForm)
         .subscribe({
-          next: (data) =>{
+          next: (data: any) =>{
             this.notifyService.showSuccess("Employee added successfully !!")
             this.router.navigate(['/employees']);
           },
-          error: (err) =>{
+          error: (err: any) => {
           console.log(err);
           }
         });
@@ -78,22 +75,20 @@ export class EmployeeAddComponent implements OnInit {
       return true;
   }
 
-  back(){
+  back(): void{
     this.router.navigate(['/employees']);
   }
 
-// Designation 
-  getDesignation(){
-    this.designationService.getDesignation()
-    .subscribe(data => {
+  getDesignation(): void{
+    this.designationService.getAll()
+    .subscribe((data: Designation[]) => {
       this.designation = data;
     });
   }
 
-  // Department
-  getDepartment(){
-    this.departmentService.getDepartment()
-    .subscribe(data => {
+  getDepartment(): void{
+    this.departmentService.getAll()
+    .subscribe((data: Department[]) => {
       this.department = data;
     });
   }

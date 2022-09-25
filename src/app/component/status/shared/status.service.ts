@@ -2,45 +2,41 @@ import { Injectable } from '@angular/core';
 import{ HttpClient } from '@angular/common/http';
 import { Status } from './status.model';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class StatusService {
 
   constructor(private http: HttpClient) { }
-  url: string = ' http://localhost:3000/Status';
+  apiEndpoint: string  = environment.BackendApiEndpointStatus;
 
-  getStatus() {
-    return this.http.get<Status[]>(this.url);
+  getAll() : Observable<Status[]>{
+    return this.http.get<Status[]>(`${this.apiEndpoint}`);
   }
-  addStatus(data: Status) {
-    return this.http.post<Status>('http://localhost:3000/Status', data);
+
+  add(status: Status): Observable<Status> {
+    return this.http.post<Status>(`${this.apiEndpoint}`, status);
   }
-  getStatusById(id: string) {
-    return this.http.get<Status>(`http://localhost:3000/Status/${id}`);
+
+  getById(id: string) : Observable<Status>{
+    return this.http.get<Status>(`${this.apiEndpoint}/${id}`);
    }
-   getStatusByName(name: string) {
-    return this.http.get<Status>(`http://localhost:3000/Status/?status=${name}`);
+
+   getByName(name: string) : Observable<Status>{
+    return this.http.get<Status>(`${this.apiEndpoint}/?name=${name}`);
    }
-   getStatusByCode(code: number) {
-    return this.http.get<Status>(`http://localhost:3000/Status/?statusCode=${code}`);
+
+   update(data: Status): any{
+    return this.http.put(`${this.apiEndpoint}/${data.id}`,data);
    }
-   updateStatus(data: Status){
-    return this.http.put(`http://localhost:3000/Status/${data.id}`,data);
-   }
-   deleteStatus(id:string){
-    return this.http.delete<Status>(`http://localhost:3000/Status/${id}`).pipe(map((res: any ) =>{
+
+   delete(id:string): Observable<Status>{
+    return this.http.delete<Status>(`${this.apiEndpoint}/${id}`).pipe(map((res: any ) =>{
       return res
     }));
  }
- getStatusDetails(id: string){
-  return this.http.get<Status>(`http://localhost:3000/Status/${id}`);
- }
- //MultipleDelete
- deleteMultiStatus(id : string){
-  return this.http.delete<any>(`http://localhost:3000/Status/${id}`).pipe(map((res: any ) =>{
-    return res
-  }));
-}
 }

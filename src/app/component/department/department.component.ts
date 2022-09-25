@@ -9,7 +9,6 @@ import { DepartmentService } from './shared/department.service';
   styleUrls: ['./department.component.css']
 })
 export class DepartmentComponent implements OnInit {
-
   departmentData: Department[] = [];
   //filter
   searchText:any;
@@ -22,23 +21,22 @@ export class DepartmentComponent implements OnInit {
   // sorting
   key: string = 'id';
   reverse: boolean = false;
-  msg: string = '';
-  clss: string = '';
 
   constructor(private departmentService: DepartmentService, private notifyService : AlertService) {
     this.isLoader = true;
    }
   
   ngOnInit(): void {
-    this.getDepartment();
+    this.getAll();
   }
-  getDepartment() {
-    this.departmentService.getDepartment().subscribe((data) => {
+
+  getAll(): void {
+    this.departmentService.getAll().subscribe((data: Department[]) => {
       this.departmentData = data;
     });
   }
-  deleteDepartment(row : any){
-    // add confirmation before deleting 
+  
+  deleteDepartment(row : Department): void{
     if (confirm("Are you sure to delete ?")){
     this.departmentService.delete(row.id)
     .subscribe(res => { 
@@ -47,96 +45,71 @@ export class DepartmentComponent implements OnInit {
           this.departmentData.splice(index, 1)
           this.notifyService.showSuccess("Department deleted successfully");
       }    
-
-    })
+    });
    }
   }
 
-  //sorting
-  sort(key){
+  sort(key: string){
     this.key = key;
     this.reverse = !this.reverse;
   }
- // Multiple delete
-  checkAllCheckBox(ev: any) {
+
+  checkAllCheckBox(ev: any): void{
     this.departmentData.forEach(x => x.checked = ev.target.checked)
   }
-  isAllCheckBoxChecked() {
+
+  isAllCheckBoxChecked(): boolean {
     return this.departmentData.every(row => row.checked);
   }
+
   deleteSelectedDepartment(): void {
     const selectedDepartments= this.departmentData.
     filter(employee => employee.checked).map(row => row.id);
-
     if(selectedDepartments && selectedDepartments.length > 0) {
-  
     selectedDepartments.forEach(id => {
-      this.departmentService.deleteMultiDepartment(id)
+      this.departmentService.delete(id)
       .subscribe({
         next: res => {
-          this.clss = 'grn';
-          this.msg = 'departments successfully deleted';
+          this.notifyService.showSuccess("Departments deleted successfully")
         },
         error: err => {
-          this.clss = 'rd';
-          this.msg = 'Something went wrong during deleting department';
+          this.notifyService.showError("Something went wrong during deleting department")
         }
       });
     });		
     } else {
-          this.clss = 'rd';
-          this.msg = 'You must select at least one department';
+        this.notifyService.showWarning("You must select at least one department")
       }
-          this.getDepartment();
+        this.getAll();
   }
 
   // inlineEdit
-    addDepartment(){
+    addDepartment(): void{
       this.departmentData['isEdit'] = true;
     }
 
-    getdepartment(){
-      this.isLoader = false;
-      this.departmentService.getDepartment().subscribe({
-        next:(res: any) => {
-        debugger;
-          this.departmentData = res;
-          this.departmentData.forEach(element => {
-          element['isEdit'] = false;
-          });
-
-          this.isLoader = false;
-          },
-          error: error => {
-          this.isLoader = false;
-      }});
-    }
-
-    cancel(data){
+    cancel(data: any): void{
       data.isEdit = false;
     }
 
-    getDepartmentId(data){
+    getDepartmentId(data: { isEdit: boolean; }): void{
       data.isEdit = true;
       this.departmentData;
     }
 
-    update(rowData){
-    //check row data has changed
-    //validate
-      this.departmentService.getDepartmentByName(rowData.department)
+    update(rowData: any): void{
+      this.departmentService.getByName(rowData.name)
       .subscribe((data: any)=>{
-          if(data.length ==0)
+          if(data.length == 0)
             {
-                rowData.isEdit = false;
-                this.departmentService.update(rowData).subscribe((updatedData)=>{});
-                this.notifyService.showSuccess("Department updated successfully")      
+              rowData.isEdit = false;
+              this.departmentService.update(rowData).subscribe((updatedData: any)=>{});
+              this.notifyService.showSuccess("Department updated successfully")      
             }
           else
             {
-                this.notifyService.showError(`department name already exists..!`)
+              this.notifyService.showError(`Department name already exists..!`)
             }
         });
-      //call update service
     }
 }

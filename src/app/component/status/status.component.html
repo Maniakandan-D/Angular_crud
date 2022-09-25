@@ -27,9 +27,6 @@
             </div>
         </li>
       </ul>
-      <ul>
-        <div *ngIf="msg" [ngClass]="clss">{{msg}}</div>
-      </ul>
       <ul class="navbar nav ml-auto">
         <li class="nav-item">
             <button type="button" class="btn btn-success" [routerLink]="['/status/status-add']"><i class="fas fa-plus"></i> Add</button>
@@ -59,10 +56,10 @@
         <td><input type="checkbox" value="{{row.id}}" [(ngModel)]="statusData[i].checked"></td>
         <td>
           <div *ngIf="!row.isEdit">
-            {{row.status}}
+            {{row.name}}
           </div>
           <div *ngIf="row.isEdit" >
-            <input type="text" #status="ngModel" required name="status" [(ngModel)]="row.status" class="form-control"/>
+            <input type="text" #status="ngModel" required name="status" [(ngModel)]="row.name" class="form-control"/>
           </div> 
         </td>
         <td>
@@ -89,7 +86,6 @@
       </tr>
     </tbody>
   </table>
-
 
 <!-- pagination -->
 <div class="pagination">

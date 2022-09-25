@@ -1,4 +1,4 @@
-export class Employees{
+export class Employee{
     id: string= '';
     empCode: any = '';
     name: string = '';
@@ -8,5 +8,7 @@ export class Employees{
     date: any;
     status: string = '';
     salary: any;
-    checked?: boolean;
 }
+export interface Employee {
+    checked?: boolean;
+  }

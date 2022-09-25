@@ -1,12 +1,17 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { StatusService } from './status.service';
 
-describe('StatusService', () => {
+fdescribe('StatusService', () => {
   let service: StatusService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports:[
+        HttpClientTestingModule
+      ],
+    });
     service = TestBed.inject(StatusService);
   });
 

@@ -1,13 +1,32 @@
+import { AnimationDriver } from '@angular/animations/browser';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule } from 'ngx-toastr';
+import { of } from 'rxjs';
+import { AlertService } from 'src/app/shared/alertService/alert.service';
+import { DepartmentService } from '../shared/department.service';
 import { DepartmentAddComponent } from './department-add.component';
 
-describe('DepartmentAddComponent', () => {
+fdescribe('DepartmentAddComponent', () => {
   let component: DepartmentAddComponent;
   let fixture: ComponentFixture<DepartmentAddComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DepartmentAddComponent ]
+      imports:[
+        HttpClientTestingModule,
+        ToastrModule.forRoot(),
+        RouterTestingModule,
+        ReactiveFormsModule,
+        FormsModule
+      ],
+      declarations: [ DepartmentAddComponent ],
+      providers:[
+        DepartmentService,
+        AlertService
+      ]
     })
     .compileComponents();
   });
@@ -20,5 +39,8 @@ describe('DepartmentAddComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should  all value form submitForm', () =>{
+    expect(component.submitForm).toBeTruthy();
   });
 });

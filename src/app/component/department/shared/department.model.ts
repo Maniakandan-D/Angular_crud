@@ -1,5 +1,9 @@
-export class Department{ 
+export class Department{
   id: string = '';
-  department: string = '';
+  name: string = '';
+}
+
+export interface Department {
   checked?: boolean;
 }
+

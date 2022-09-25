@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Employees } from './shared/employee.model';
+import { Employee } from './shared/employee.model';
 import { EmployeeService } from './shared/employee.service';
 import { AlertService } from 'src/app/shared/alertService/alert.service';
+
 
 
 @Component({
@@ -10,7 +11,7 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
-  employees: Employees[] = [];
+  employees: Employee[] = [];
    //filter
    searchText:any;
    //pagination
@@ -21,22 +22,19 @@ export class EmployeesComponent implements OnInit {
     key: string = 'id';
     reverse: boolean = false;
 
-    msg: string = '';
-    clss: string = '';
   constructor(private employeeService: EmployeeService,  private notifyService : AlertService) { }
 
   ngOnInit(): void {
     this.getEmployee();
   }
 
-  getEmployee() {
-    this.employeeService.getEmployee().subscribe((data) => {
+  getEmployee(): void {
+    this.employeeService.getAll().subscribe((data) => {
       this.employees = data;
     });
   }
 
-  deleteEmployee(row : any){
-    // add confirmation before deleting 
+  deleteEmployee(row : any): void{
     if (confirm("Are you sure to delete ?")){
         this.employeeService.delete(row.id)
         .subscribe(res => { 
@@ -48,43 +46,37 @@ export class EmployeesComponent implements OnInit {
         });
      }
   }
-    //sorting
-    sort(key){
-      this.key = key;
-      this.reverse = !this.reverse;
+
+  sort(key: string): void{
+    this.key = key;
+    this.reverse = !this.reverse;
    }
 
-  // Multiple delete
-  checkAllCheckBox(ev: any) {
+  checkAllCheckBox(ev: any): void {
 		this.employees.forEach(x => x.checked = ev.target.checked)
 	}
 
-  isAllCheckBoxChecked() {
+  isAllCheckBoxChecked(): boolean {
 		return this.employees.every(row => row.checked);
 	}
 
   deleteMultiEmployees(): void {
 		const selectedEmployees= this.employees.
     filter(employee => employee.checked).map(row => row.id);
-	
 		if(selectedEmployees && selectedEmployees.length > 0) {
-		
 			selectedEmployees.forEach(id => {
-				this.employeeService.deleteEmployees(id)
+				this.employeeService.delete(id)
 				.subscribe({
           next:res => {
-					  this.clss = 'grn';
-					  this.msg = 'employees successfully deleted';
+					  this.notifyService.showSuccess("Employees deleted sucessfully..!")
 					},
           error: err => {
-            this.clss = 'rd';
-						this.msg = 'Something went wrong during deleting employee';
+            this.notifyService.showError("Something went wrong during employees deleted..!")
           }
           });
 		  });		
 		} else {
-			  this.clss = 'rd';
-			  this.msg = 'You must select at least one employee';
+			  this.notifyService.showWarning("You must select at least one employee")
 		  }
 		  this.getEmployee();
 	}
