@@ -19,6 +19,7 @@ import { StatusService } from '../../status/shared/status.service';
 })
 
 export class AddEditComponent implements OnInit {
+
   designation: Designation[] = [];
   department : Department [] = [];
   status: Status[] = [];
@@ -49,7 +50,6 @@ export class AddEditComponent implements OnInit {
   ngOnInit(): void {
     this.id =  this.route.snapshot.params['id'];
     this.isEmployee = !this.id;
-
     this.form = this.formBuilder.group({
       empCode: ['', Validators.required],
       name: ['', Validators.required],

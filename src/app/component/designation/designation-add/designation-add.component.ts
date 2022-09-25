@@ -5,7 +5,6 @@ import { DesignationService } from '../shared/designation.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/shared/alertService/alert.service';
 
-
 @Component({
   selector: 'app-designation-add',
   templateUrl: './designation-add.component.html',

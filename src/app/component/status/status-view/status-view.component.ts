@@ -20,7 +20,8 @@ export class StatusViewComponent implements OnInit {
     .subscribe({
       next:data => {
         this.Status= data;
-      },error: error => console.log(error)});
+      }
+    });
   }
 
   statusDetails(id: string): void{

@@ -7089,24 +7089,6 @@
       "picture": "http://placehold.it/32x32",
       "createdOn": "2022-09-23T11:32:51.z",
       "modifiedOn": "2022-09-23T11:32:51 -06:-30"
-    },
-    {
-      "id": "632d4c0b7ce4fa76c9b1df6a",
-      "empCode": 1393,
-      "name": "Rollins Jones",
-      "email": "rollinsjones@unisure.com",
-      "designation": "Software Architect",
-      "department": "Software",
-      "date": "2016-09-08",
-      "status": "Probation",
-      "salary": "$1,570.62",
-      "gender": "male",
-      "isActive": false,
-      "phone": "+1 (939) 554-3690",
-      "address": "981 Anchorage Place, Eden, Vermont, 5991",
-      "picture": "http://placehold.it/32x32",
-      "createdOn": "2022-09-23T11:32:51.z",
-      "modifiedOn": "2022-09-23T11:32:51 -06:-30"
     }
   ]
 }

@@ -9,6 +9,7 @@ import { EmployeeService } from '../shared/employee.service';
   styleUrls: ['./employee-edit.component.css']
 })
 export class EmployeeEditComponent implements OnInit {
+  
   employeeForm: Employee ={
     id: '',
     empCode: '',

@@ -9,16 +9,13 @@ import { DepartmentService } from './shared/department.service';
   styleUrls: ['./department.component.css']
 })
 export class DepartmentComponent implements OnInit {
+
   departmentData: Department[] = [];
-  //filter
   searchText:any;
-  //pagination
   totalLength:any;
   page:number = 1;
   pageSize:number =5;
-  //edit
   isLoader: boolean;
-  // sorting
   key: string = 'id';
   reverse: boolean = false;
 
@@ -83,7 +80,6 @@ export class DepartmentComponent implements OnInit {
         this.getAll();
   }
 
-  // inlineEdit
     addDepartment(): void{
       this.departmentData['isEdit'] = true;
     }

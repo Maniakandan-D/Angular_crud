@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./employee-view.component.css']
 })
 export class EmployeeViewComponent implements OnInit {
+  
  id: string;
  employees: Employee;
 

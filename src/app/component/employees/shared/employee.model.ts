@@ -9,6 +9,7 @@ export class Employee{
     status: string = '';
     salary: any;
 }
+
 export interface Employee {
     checked?: boolean;
   }
