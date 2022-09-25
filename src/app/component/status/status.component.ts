@@ -86,22 +86,6 @@ export class StatusComponent implements OnInit {
     this.statusData['isEdit'] = true;
   }
 
-  getstatus(): void{
-    this.isLoader = false;
-    this.statusService.getAll().subscribe({
-      next:(res: any) => {
-      debugger;
-        this.statusData = res;
-        this.statusData.forEach(element => {
-        element['isEdit'] = false;
-        });
-        this.isLoader = false;
-      },error:error => {
-        this.isLoader = false;
-      }
-    });
-  }
-
   cancel(data: { isEdit: boolean; }): void{
     data.isEdit = false;
   }
