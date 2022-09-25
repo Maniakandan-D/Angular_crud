@@ -1,8 +1,8 @@
  <h2> Department Details </h2>
 
-    <div *ngIf="departments">
+    <div *ngIf="departmentData">
         <div>
-            <label><b>Department:  </b></label>{{departments.department}}
+            <label><b>Department:  </b></label>{{departmentData.name}}
         </div>
     </div>
-    <button (click)="list()" class="btn btn-secondary">Back</button>
+    <button (click)="back()" class="btn btn-secondary">Back</button>

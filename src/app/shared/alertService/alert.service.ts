@@ -8,19 +8,19 @@ export class AlertService {
 
   constructor(private toastr: ToastrService) { }
   
-  showSuccess(message){
+  showSuccess(message: string): void{
     this.toastr.success(message)
   }
  
-  showError(message){
+  showError(message: string): void{
     this.toastr.error(message)
   }
  
-  showInfo(message){
+  showInfo(message: string): void{
     this.toastr.info(message)
   }
  
-  showWarning(message){
+  showWarning(message: string): void{
     this.toastr.warning(message)
   }
 

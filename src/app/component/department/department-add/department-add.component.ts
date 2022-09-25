@@ -11,46 +11,40 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
   styleUrls: ['./department-add.component.css']
 })
 export class DepartmentAddComponent implements OnInit {
-  
   form!: FormGroup;
   deptForm: Department = new Department();
 
   constructor(private departmentService: DepartmentService,
-    private router:Router, private formBuilder: FormBuilder,
-    private notifyService : AlertService) {  }
-
+    private router: Router, private formBuilder: FormBuilder,
+    private notifyService: AlertService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      department: [ '', [Validators.required]
+      department: ['', [Validators.required]
       ],
-    }, {updateOn: 'change' });
+    }, { updateOn: 'change' });
   }
 
-
-  submitForm(){
-      var department = this.form.get('department').value;
-
-      this.departmentService.getDepartmentByName(department).subscribe((data:any)=>{
-
-      if(data.length > 0)
-      {
-          this.notifyService.showWarning("Department name already exists")
+  submitForm(): boolean {
+    var department = this.form.get('department').value;
+    this.departmentService.getByName(department).subscribe((data: any) => {
+      if (data.length > 0) {
+        this.notifyService.showWarning(`Department  ${department} already exists`)
       }
-      else
-      {
-          this.departmentService.addDepartment(this.deptForm)
+      else {
+        this.departmentService.add(this.deptForm)
           .subscribe({
-          next:(data) => {
-          this.notifyService.showSuccess("Department added successfully !!")
-          this.router.navigate(["/department"])
-           },
-          }); 
+            next: (data : any) => {
+              this.notifyService.showSuccess(`Department ${department} added successfully !!`)
+              this.router.navigate(["/department"])
+            },
+          });
       }
-  });
-  return true; 
+    });
+    return true;
   }
-  back(){
+
+  back(): void {
     this.router.navigate(['/department']);
-   }
+  }
 }

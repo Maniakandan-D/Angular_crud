@@ -1,14 +1,27 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { DesignationService } from '../shared/designation.service';
 
 import { DesignationViewComponent } from './designation-view.component';
 
-describe('DesignationViewComponent', () => {
+fdescribe('DesignationViewComponent', () => {
   let component: DesignationViewComponent;
   let fixture: ComponentFixture<DesignationViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DesignationViewComponent ]
+      imports:[
+        HttpClientTestingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterTestingModule
+      ],
+      declarations: [ DesignationViewComponent ],
+      providers:[
+        DesignationService,   
+      ]
     })
     .compileComponents();
   });

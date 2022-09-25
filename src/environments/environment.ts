@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  BackendApiEndpointEmployee: "http://localhost:3000/Employees",
+  BackendApiEndpointDept: "http://localhost:3000/Departments",
+  BackendApiEndpointDesign: "http://localhost:3000/Departments",
+  BackendApiEndpointStatus: "http://localhost:3000/Status",
+
 };
 
 /*

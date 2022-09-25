@@ -1,7 +1,9 @@
 export class Status{ 
     id: string = '';
-    status: string = '';
-    checked?: boolean;
+    name: string = '';
     createdOn:Date;
     modifiedOn:Date;
+  }
+  export interface Status {
+    checked?: boolean;
   }

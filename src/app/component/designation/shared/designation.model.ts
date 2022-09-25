@@ -1,5 +1,8 @@
 export class Designation{ 
     id: string;
-    designation: string;
+    name: string;
+  }
+
+export interface Designation {
     checked?: boolean;
   }

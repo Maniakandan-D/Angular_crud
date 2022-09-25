@@ -15,14 +15,10 @@ export class DesignationComponent implements OnInit {
   //pagination
   totalLength:any;
   page:number = 1;
-  pageSize:number =5;
-  isEdit: boolean = false;
+  pageSize:number = 5;
    // sorting
   key: string = 'id';
   reverse: boolean = false;
-// MultiDelete
-  msg: string = '';
-  clss: string = '';
   //edit
   isLoader: boolean;
 
@@ -32,16 +28,15 @@ export class DesignationComponent implements OnInit {
     this.getDesignation();
   }
 
-  getDesignation() {
-    this.designationService.getDesignation().subscribe((data) => {
+  getDesignation(): void {
+    this.designationService.getAll().subscribe((data: Designation[]) => {
       this.designationData = data;
     });
   }
 
-  deleteDesignation(row : any){
-    // add confirmation before deleting 
+  deleteDesignation(row : any): void{
     if (confirm("Are you sure to delete ?")){
-        this.designationService.deleteDesignation(row.id)
+        this.designationService.delete(row.id)
         .subscribe(res => { 
         const index: number = this.designationData.indexOf(row);
         if (index !== -1) {
@@ -52,85 +47,61 @@ export class DesignationComponent implements OnInit {
     }
   }
 
-  //sorting
-  sort(key){
+  sort(key: string): void{
     this.key = key;
     this.reverse = !this.reverse;
   }
 
- // Multiple delete
-  checkAllCheckBox(ev: any) {
+  checkAllCheckBox(ev: any): void {
     this.designationData.forEach(x => x.checked = ev.target.checked)
   }
-  isAllCheckBoxChecked() {
+
+  isAllCheckBoxChecked(): boolean {
     return this.designationData.every(row => row.checked);
   }
+
   deleteMultiDesignation(): void {
     const selectedDesignation= this.designationData.
     filter(employee => employee.checked).map(row => row.id);
-
     if(selectedDesignation && selectedDesignation.length > 0) {
-  
       selectedDesignation.forEach(id => {
-        this.designationService.deleteMultiDesignation(id)
+        this.designationService.delete(id)
         .subscribe({
           next:res => {
-            this.clss = 'grn';
-            this.msg = 'designations successfully deleted';
+            this.notifyService.showSuccess("Designations successfully deleted")
         }, 
           error: err => {
-            this.clss = 'rd';
-            this.msg = 'Something went wrong during deleting designation';
+            this.notifyService.showError("Something went wrong during deleting designation")
           }
         });
       });		
     } else {
-        this.clss = 'rd';
-        this.msg = 'You must select at least one designation';
+        this.notifyService.showWarning("You must select at least one designation")
       }
         this.getDesignation();
   }
 
 // inlineEdit
-  addDepartment(){
+  addDepartment(): void{
     this.designationData['isEdit'] = true;
   }
-  getdesignation(){
-    this.isLoader = false;
-    this.designationService.getDesignation().subscribe({
 
-    next:(res: any) => {
-    debugger;
-      this.designationData = res;
-      this.designationData.forEach(element => {
-    element['isEdit'] = false;
-    });
-    this.isLoader = false;
-  },
-  error: error => {
-    this.isLoader = false;
-  }
-  });
-}
-
-cancel(data){
+cancel(data: { isEdit: boolean;}): void{
   data.isEdit = false;
 }
 
-getDesignationId(data){
+getDesignationId(data: { isEdit: boolean; }): void{
   data.isEdit = true;
   this.designationData;
 }
 
-update(rowData){
-  //check row data has changed
- //validate
-  this.designationService.getDesignationByName(rowData.designation)
+update(rowData: any): void{
+  this.designationService.getByName(rowData.designation)
   .subscribe((data: any)=>{
       if(data.length ==0)
         {
           rowData.isEdit = false;
-          this.designationService.updateDesignation(rowData).subscribe((updatedData)=>{});
+          this.designationService.update(rowData).subscribe((updatedData: any)=>{});
           this.notifyService.showSuccess("Designation updated successfully")      
         }
         else

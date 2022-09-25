@@ -1,4 +1,5 @@
-<legend><b>Employee Details</b></legend>
+<h1 *ngIf="isEmployee">Add User</h1>
+<h1 *ngIf="!isEmployee">Edit User</h1>
 
 <form [formGroup]="form" (ngSubmit)="form.valid && submitForm()" class="col-md-8 mb-6" #localForm="ngForm">
   <div class="row">
@@ -69,8 +70,8 @@
         <label for="status">Status</label>
         <div class="input-group">
           <select type="dropdown" class="form-control" formControlName="status" name="status" [(ngModel)]="employeeForm.status" [class.is-invalid]="localForm.submitted && form.get('status')?.invalid" autocomplete="off">
-            <option>Confirmed</option>
-            <option>Probation</option>
+            <option value="default"></option>
+            <option *ngFor="let row of status">{{row.name}}</option>
           </select>
           <div class="invalid-feedback">
             Status required
@@ -90,11 +91,17 @@
   </div>
 
   <div class="row">
-    <div class="col-1">
+    <div class="col-1" *ngIf="isEmployee">
       <button type="submit"  class="btn btn-primary">Add</button>
     </div>
-    <div class="col-1">
+    <div class="col-1" *ngIf="!isEmployee">
+        <button type="submit"  class="btn btn-primary">Update</button>
+    </div>
+    <div class="col-1" *ngIf="isEmployee">
       <button type="button" (click)="back()" class="btn btn-secondary">Back</button>
+    </div>
+    <div class="col-1" *ngIf="!isEmployee">
+      <button type="button" (click)="back()" class="btn btn-secondary">Cancel</button>
     </div>
   </div>
 </form>

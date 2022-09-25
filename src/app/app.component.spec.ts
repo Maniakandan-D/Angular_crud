@@ -1,16 +1,23 @@
-import { TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TestBed} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './shared/header/header.component';
 
-describe('AppComponent', () => {
+
+fdescribe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [
-        AppComponent
+        AppComponent, 
+        HeaderComponent
       ],
+      schemas: [
+       NO_ERRORS_SCHEMA
+      ]
     }).compileComponents();
   });
 
@@ -30,6 +37,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('AngularCrudApp app is running!');
+    expect(compiled.querySelector('h4').textContent).toContain('AngularCrudApp');
   });
 });

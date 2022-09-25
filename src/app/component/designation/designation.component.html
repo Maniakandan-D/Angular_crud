@@ -8,11 +8,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown mx-3">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            <a class="btn btn-secondary dropdown-toggle"  role="button" data-toggle="dropdown" aria-expanded="false">
                 Action
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" (click)="deleteMultiDesignation()">Delate</a>
+                <button class="dropdown-item" (click)="deleteMultiDesignation()">Delate</button>
             </div>
         </li>
         <li class="nav-item btn-group dropright">
@@ -26,9 +26,6 @@
               </form>
             </div>
         </li>
-      </ul>
-      <ul>
-        <div *ngIf="msg" [ngClass]="clss">{{msg}}</div>
       </ul>
       <ul class="navbar nav ml-auto">
         <li class="nav-item">
@@ -50,7 +47,7 @@
     <thead>
       <tr>
         <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
-        <th (click)="sort('designation')" scope="col-4">Designation <i class="fas fa-sort"></i></th>
+        <th (click)="sort('name')" scope="col-4">Designation <i class="fas fa-sort"></i></th>
         <th scope="col-2"></th>
       </tr>
     </thead>
@@ -59,10 +56,10 @@
         <td><input type="checkbox" value="{{row.id}}" [(ngModel)]="designationData[i].checked"></td>
         <td>
           <div *ngIf="!row.isEdit">
-            {{row.designation}}
+            {{row.name}}
           </div>
           <div *ngIf="row.isEdit" novalidate>
-            <input type="text" #designation="ngModel" required name="designation" [(ngModel)]="row.designation" class="form-control"/>
+            <input type="text" #designation="ngModel" required name="name" [(ngModel)]="row.name" class="form-control"/>
           </div> 
         </td>
         <td>
