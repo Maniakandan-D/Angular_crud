@@ -8,17 +8,15 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.css']
 })
+
 export class StatusComponent implements OnInit {
+
   statusData: Status[] = [];
-  //filter
   searchText:any;
-  //pagination
   totalLength:any;
   page:number = 1;
   pageSize:number = 5;
-  //edit
- isLoader: boolean;
-  // sorting
+  isLoader: boolean;
   key: string = 'id';
   reverse: boolean = false;
 
@@ -81,7 +79,6 @@ export class StatusComponent implements OnInit {
 		  this.getStatus();
 	}
 
-   // inlineEdit
    addStatus(): void{
     this.statusData['isEdit'] = true;
   }

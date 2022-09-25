@@ -12,6 +12,7 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
   styleUrls: ['./status-add.component.css']
 })
 export class StatusAddComponent implements OnInit {
+  
   form!: FormGroup;
   myForm: Status = new Status();
 
@@ -28,7 +29,7 @@ export class StatusAddComponent implements OnInit {
     var name = this.form.get('status').value;
     this.statusService.getByName(name).subscribe((data: any) => {
       if (data.length > 0) {
-        this.notifyService.showWarning(`Status  ${name} already exists`)
+        this.notifyService.showWarning(`Status ${name} already exists`)
       }
     else
     {
@@ -36,7 +37,7 @@ export class StatusAddComponent implements OnInit {
       this.statusService.add(this.myForm)
       .subscribe({
         next: (data: any) =>{
-          this.notifyService.showSuccess("Status added successfully");
+          this.notifyService.showSuccess(`Status ${name} added successfully`);
           this.router.navigate(['/status']);
         },
       })

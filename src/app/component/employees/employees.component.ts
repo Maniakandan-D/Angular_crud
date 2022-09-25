@@ -11,16 +11,14 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
+
   employees: Employee[] = [];
-   //filter
-   searchText:any;
-   //pagination
-   totalLength:any;
-   page:number = 1;
-   pageSize:number =5;
-    // sorting
-    key: string = 'id';
-    reverse: boolean = false;
+  searchText:any;
+  totalLength:any;
+  page:number = 1;
+  pageSize:number =5;
+  key: string = 'id';
+  reverse: boolean = false;
 
   constructor(private employeeService: EmployeeService,  private notifyService : AlertService) { }
 

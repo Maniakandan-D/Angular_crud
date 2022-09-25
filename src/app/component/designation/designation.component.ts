@@ -8,18 +8,16 @@ import { DesignationService } from './shared/designation.service';
   templateUrl: './designation.component.html',
   styleUrls: ['./designation.component.css']
 })
+
 export class DesignationComponent implements OnInit {
+
   designationData: Designation[] = [];
-  //filter
   searchText:any;
-  //pagination
   totalLength:any;
   page:number = 1;
   pageSize:number = 5;
-   // sorting
   key: string = 'id';
   reverse: boolean = false;
-  //edit
   isLoader: boolean;
 
   constructor(private designationService: DesignationService, private notifyService : AlertService) { this.isLoader = true; }
@@ -81,7 +79,6 @@ export class DesignationComponent implements OnInit {
         this.getDesignation();
   }
 
-// inlineEdit
   addDepartment(): void{
     this.designationData['isEdit'] = true;
   }

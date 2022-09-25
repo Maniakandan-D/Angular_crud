@@ -10,7 +10,9 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
   templateUrl: './department-add.component.html',
   styleUrls: ['./department-add.component.css']
 })
+
 export class DepartmentAddComponent implements OnInit {
+  
   form!: FormGroup;
   deptForm: Department = new Department();
 

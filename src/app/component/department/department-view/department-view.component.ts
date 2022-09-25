@@ -9,6 +9,7 @@ import { Department } from '../shared/department.model';
   styleUrls: ['./department-view.component.css']
 })
 export class DepartmentViewComponent implements OnInit {
+  
   id: string;
   departmentData: Department;
   

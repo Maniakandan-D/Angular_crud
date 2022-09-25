@@ -16,9 +16,10 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
   styleUrls: ['./employee-add.component.css']
 })
 export class EmployeeAddComponent implements OnInit {
+
   form!: FormGroup;
- designation: Designation[] = [];
- department : Department [] = [];
+  designation: Designation[] = [];
+  department : Department [] = [];
 
   employeeForm: Employee = {
     id: '',

@@ -4,6 +4,7 @@ export class Status{
     createdOn:Date;
     modifiedOn:Date;
   }
-  export interface Status {
+
+export interface Status {
     checked?: boolean;
   }

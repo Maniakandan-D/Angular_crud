@@ -17,18 +17,23 @@ export class EmployeeService {
   getAll(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.apiEndpoint}`);
   }
+  
   add(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(`${this.apiEndpoint}`, employee);
   }
+
   getById(id: string): Observable<Employee> {
     return this.http.get<Employee>(`${this.apiEndpoint}/${id}`);
    }
+
    getByCode(code: number): Observable<Employee> {
     return this.http.get<Employee>(`${this.apiEndpoint}/?empCode=${code}`);
    }
+
    update(id: string ,data: Employee): any{
     return this.http.put(`${this.apiEndpoint}/${id}`, data);
    }
+
    delete(id:string): Observable<Employee>{
     return this.http.delete<Employee>(`${this.apiEndpoint}/${id}`).pipe(map((res: any ) =>{
       return res
