@@ -93,7 +93,7 @@ export class StatusComponent implements OnInit {
   }
 
   update(rowData: any): void{
-    this.statusService.getByName(rowData.status)
+    this.statusService.getByName(rowData.name)
     .subscribe((data: any)=>{
         if(data.length ==0)
           {

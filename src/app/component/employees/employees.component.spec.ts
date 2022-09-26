@@ -8,7 +8,7 @@ import { DesignationService } from '../designation/shared/designation.service';
 import { EmployeesComponent } from './employees.component';
 import { EmployeeService } from './shared/employee.service';
 
-fdescribe('EmployeesComponent', () => {
+describe('EmployeesComponent', () => {
   let component: EmployeesComponent;
   let fixture: ComponentFixture<EmployeesComponent>;
 

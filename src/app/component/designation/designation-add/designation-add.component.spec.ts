@@ -7,7 +7,7 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
 import { DesignationService } from '../shared/designation.service';
 import { DesignationAddComponent } from './designation-add.component';
 
-fdescribe('DesignationAddComponent', () => {
+describe('DesignationAddComponent', () => {
   let component: DesignationAddComponent;
   let fixture: ComponentFixture<DesignationAddComponent>;
 

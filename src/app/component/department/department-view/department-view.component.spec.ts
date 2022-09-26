@@ -6,7 +6,7 @@ import { DepartmentService } from '../shared/department.service';
 
 import { DepartmentViewComponent } from './department-view.component';
 
-fdescribe('DepartmentViewComponent', () => {
+describe('DepartmentViewComponent', () => {
   let component: DepartmentViewComponent;
   let fixture: ComponentFixture<DepartmentViewComponent>;
 

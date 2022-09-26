@@ -5,7 +5,7 @@ import { EmployeeService } from '../shared/employee.service';
 
 import { EmployeeViewComponent } from './employee-view.component';
 
-fdescribe('EmployeeViewComponent', () => {
+describe('EmployeeViewComponent', () => {
   let component: EmployeeViewComponent;
   let fixture: ComponentFixture<EmployeeViewComponent>;
 

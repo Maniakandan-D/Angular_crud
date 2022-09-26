@@ -4,7 +4,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AlertService } from './alert.service';
 
-fdescribe('AlertService', () => {
+describe('AlertService', () => {
   let service: AlertService;
 
   beforeEach(() => {
