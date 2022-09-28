@@ -25,12 +25,12 @@ export class DesignationService {
     return this.http.get<Designation>(`${this.apiEndpoint}/${id}`);
   }
 
-  getByName(name: string): Observable<Designation> {
-    return this.http.get<Designation>(`${this.apiEndpoint}/?name=${name}`);
+  getByName(name: string): Observable<Designation[]> {
+    return this.http.get<Designation[]>(`${this.apiEndpoint}/?name=${name}`);
   }
 
-  update(data: Designation): any{
-    return this.http.put(`${this.apiEndpoint}/${data.id}`,data);
+  update(data: Designation): Observable<Designation>{
+    return this.http.put<Designation>(`${this.apiEndpoint}/${data.id}`,data);
   }
 
   delete(id:string): Observable<Designation>{

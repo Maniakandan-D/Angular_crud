@@ -21,12 +21,15 @@ export class StatusAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      status: this.formBuilder.control ('', Validators.required),
+      name: this.formBuilder.control ('', Validators.required),
     }, {updateOn: 'change' });
   }
 
   submitForm(): boolean{
-    var name = this.form.get('status').value;
+    var name = this.form.get('name').value;
+    if(!name.trim()){
+      return false;
+    }
     this.statusService.getByName(name).subscribe((data: any) => {
       if (data.length > 0) {
         this.notifyService.showWarning(`Status ${name} already exists`)

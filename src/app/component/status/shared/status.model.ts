@@ -5,6 +5,7 @@ export class Status{
     modifiedOn:Date;
   }
 
-export interface Status {
+  export class StatusVM  extends Status{
     checked?: boolean;
+    isEdit?: boolean;
   }

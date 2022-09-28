@@ -5,7 +5,7 @@
         <div class="form-group">
           <label for="department">Department</label>
           <div class="input-group">
-            <input type="text" class="form-control" formControlName="department" name="department" [(ngModel)]="deptForm.name" [class.is-invalid]="localForm.submitted && form.get('department')?.invalid" autocomplete="off"/>
+            <input type="text" class="form-control" formControlName="name" name="name" [(ngModel)]="deptForm.name" [class.is-invalid]="localForm.submitted && form.get('name')?.invalid" autocomplete="off"/>
             <div class="invalid-feedback">
               Department is required
             </div>

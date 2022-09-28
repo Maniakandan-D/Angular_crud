@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/shared/alertService/alert.service';
-import { Department } from './shared/department.model';
+import { Department, DepartmentVM } from './shared/department.model';
 import { DepartmentService } from './shared/department.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { DepartmentService } from './shared/department.service';
 })
 export class DepartmentComponent implements OnInit {
 
-  departmentData: Department[] = [];
+  departmentData: DepartmentVM[] = [];
   searchText:any;
   totalLength:any;
   page:number = 1;
@@ -39,8 +39,8 @@ export class DepartmentComponent implements OnInit {
     .subscribe(res => { 
       const index: number = this.departmentData.indexOf(row);
       if (index !== -1) {
-          this.departmentData.splice(index, 1)
-          this.notifyService.showSuccess("Department deleted successfully");
+          this.departmentData.splice(index, 1);
+          this.notifyService.showSuccess(`Department ${row.name} deleted successfully`);
       }    
     });
    }
@@ -60,24 +60,30 @@ export class DepartmentComponent implements OnInit {
   }
 
   deleteSelectedDepartment(): void {
+    if (confirm("Are you sure to delete ?")){
     const selectedDepartments= this.departmentData.
-    filter(employee => employee.checked).map(row => row.id);
+    filter(employee => employee.checked);
     if(selectedDepartments && selectedDepartments.length > 0) {
-    selectedDepartments.forEach(id => {
-      this.departmentService.delete(id)
+    selectedDepartments.forEach(department => {
+      this.departmentService.delete(department.id)
       .subscribe({
         next: res => {
-          this.notifyService.showSuccess("Departments deleted successfully")
+          const index: number = this.departmentData.indexOf(department);
+          if (index !== -1) {
+              this.departmentData.splice(index, 1);
+              this.notifyService.showSuccess(`Department ${department.name} deleted successfully`); // all aler message should have respective names
+          }   
         },
         error: err => {
-          this.notifyService.showError("Something went wrong during deleting department")
+          this.notifyService.showError(`Something went wrong during deleting ${department.name}`)
         }
       });
-    });		
-    } else {
+    });
+    }		
+  }
+     else {
         this.notifyService.showWarning("You must select at least one department")
-      }
-        this.getAll();
+     }
   }
 
     addDepartment(): void{
@@ -93,18 +99,18 @@ export class DepartmentComponent implements OnInit {
       this.departmentData;
     }
 
-    update(rowData: any): void{
-      this.departmentService.getByName(rowData.name)
-      .subscribe((data: any)=>{
+    update(rowData: DepartmentVM): void{
+      this.departmentService.getByName(rowData.name.replace(/^\s+|\s+$/gm,''))
+      .subscribe((data: Department[])=>{
           if(data.length == 0)
             {
               rowData.isEdit = false;
-              this.departmentService.update(rowData).subscribe((updatedData: any)=>{});
-              this.notifyService.showSuccess("Department updated successfully")      
+              this.departmentService.update(rowData).subscribe((updatedData: Department)=>{});
+              this.notifyService.showSuccess(`Department ${rowData.name} updated successfully`)      
             }
           else
             {
-              this.notifyService.showError(`Department name already exists..!`)
+              this.notifyService.showError(`Department ${rowData.name} already exists..!`)
             }
         });
     }

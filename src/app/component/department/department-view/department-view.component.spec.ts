@@ -21,7 +21,7 @@ describe('DepartmentViewComponent', () => {
       declarations: [ DepartmentViewComponent ],
       providers:[
         DepartmentService,
-      ]
+      ],
     })
     .compileComponents();
   });

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from 'src/app/shared/alertService/alert.service';
 import { Designation } from '../shared/designation.model';
 import { DesignationService } from '../shared/designation.service';
 
@@ -14,7 +13,7 @@ export class DesignationViewComponent implements OnInit {
   designationData: Designation;
 
   constructor(private route: ActivatedRoute, private designationService: DesignationService, 
-    private router: Router, private notifyService: AlertService) { }
+    private router: Router) { }
 
   ngOnInit(): void {
     this.designationData = new Designation();
@@ -23,9 +22,6 @@ export class DesignationViewComponent implements OnInit {
     .subscribe({
       next: data => {
       this.designationData = data;
-    }, 
-      error: error => {
-        this.notifyService.showError("Something went wrong during designation view")
       }
     });
   }
