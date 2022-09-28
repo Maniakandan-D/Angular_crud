@@ -150,5 +150,4 @@ describe('DepartmentComponent', () => {
 
     expect(updateDepartment.isEdit).toEqual(false);
   });
- 
 });
