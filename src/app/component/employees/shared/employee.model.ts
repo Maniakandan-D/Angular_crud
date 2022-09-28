@@ -10,6 +10,6 @@ export class Employee{
     salary: any;
 }
 
-export interface Employee {
+export class EmployeeVM  extends Employee{
     checked?: boolean;
   }

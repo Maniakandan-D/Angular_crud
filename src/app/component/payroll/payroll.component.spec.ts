@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PayrollComponent } from './payroll.component';
 
-fdescribe('PayrollComponent', () => {
+describe('PayrollComponent', () => {
   let component: PayrollComponent;
   let fixture: ComponentFixture<PayrollComponent>;
 

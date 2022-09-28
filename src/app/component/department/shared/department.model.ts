@@ -3,7 +3,8 @@ export class Department{
   name: string = '';
 }
 
-export interface Department {
+export class DepartmentVM  extends Department{
   checked?: boolean;
+  isEdit?: boolean;
 }
 

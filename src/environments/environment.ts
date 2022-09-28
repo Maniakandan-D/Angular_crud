@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   BackendApiEndpointEmployee: "http://localhost:3000/Employees",
   BackendApiEndpointDept: "http://localhost:3000/Departments",
-  BackendApiEndpointDesign: "http://localhost:3000/Departments",
+  BackendApiEndpointDesign: "http://localhost:3000/Designation",
   BackendApiEndpointStatus: "http://localhost:3000/Status",
 
 };

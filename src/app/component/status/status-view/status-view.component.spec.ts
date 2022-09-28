@@ -8,7 +8,7 @@ import { StatusService } from '../shared/status.service';
 
 import { StatusViewComponent } from './status-view.component';
 
-fdescribe('StatusViewComponent', () => {
+describe('StatusViewComponent', () => {
   let component: StatusViewComponent;
   let fixture: ComponentFixture<StatusViewComponent>;
 

@@ -26,8 +26,8 @@ export class StatusService {
     return this.http.get<Status>(`${this.apiEndpoint}/${id}`);
    }
 
-   getByName(name: string) : Observable<Status>{
-    return this.http.get<Status>(`${this.apiEndpoint}/?name=${name}`);
+   getByName(name: string) : Observable<Status[]>{
+    return this.http.get<Status[]>(`${this.apiEndpoint}/?name=${name}`);
    }
 
    update(data: Status): any{

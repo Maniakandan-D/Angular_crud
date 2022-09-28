@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from './shared/employee.model';
+import { Employee, EmployeeVM } from './shared/employee.model';
 import { EmployeeService } from './shared/employee.service';
 import { AlertService } from 'src/app/shared/alertService/alert.service';
-
 
 
 @Component({
@@ -12,7 +11,7 @@ import { AlertService } from 'src/app/shared/alertService/alert.service';
 })
 export class EmployeesComponent implements OnInit {
 
-  employees: Employee[] = [];
+  employees: EmployeeVM[] = [];
   searchText:any;
   totalLength:any;
   page:number = 1;
@@ -32,14 +31,14 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  deleteEmployee(row : any): void{
+  deleteEmployee(row : Employee): void{
     if (confirm("Are you sure to delete ?")){
         this.employeeService.delete(row.id)
         .subscribe(res => { 
           const index: number = this.employees.indexOf(row);
           if (index !== -1) {
             this.employees.splice(index, 1)
-            this.notifyService.showSuccess("Employee deleted successfully");
+            this.notifyService.showSuccess(`Employee ${row.name} deleted successfully`);
           }    
         });
      }
@@ -59,23 +58,28 @@ export class EmployeesComponent implements OnInit {
 	}
 
   deleteMultiEmployees(): void {
+    if (confirm("Are you sure to delete ?")){
 		const selectedEmployees= this.employees.
-    filter(employee => employee.checked).map(row => row.id);
+    filter(employee => employee.checked);
 		if(selectedEmployees && selectedEmployees.length > 0) {
-			selectedEmployees.forEach(id => {
-				this.employeeService.delete(id)
+			selectedEmployees.forEach(employees => {
+				this.employeeService.delete(employees.id)
 				.subscribe({
           next:res => {
-					  this.notifyService.showSuccess("Employees deleted sucessfully..!")
+            const index: number = this.employees.indexOf(employees);
+            if (index !== -1) {
+              this.employees.splice(index, 1);
+              this.notifyService.showSuccess(`Employees ${employees.name} deleted successfully`);
+            }
 					},
           error: err => {
-            this.notifyService.showError("Something went wrong during employees deleted..!")
+            this.notifyService.showError(`Something went wrong during ${employees.name} deleted..!`)
           }
           });
 		  });		
 		} else {
 			  this.notifyService.showWarning("You must select at least one employee")
 		  }
-		  this.getEmployee();
+      } 
 	}
 }
