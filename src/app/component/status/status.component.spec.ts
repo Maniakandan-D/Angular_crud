@@ -145,15 +145,4 @@ describe('StatusComponent', () => {
     component.update(statusUpdate);
     expect(statusUpdate.isEdit).toEqual(false);
   }); 
-
-  // it('update status not', () => {
-  //   var statusUpdate = new StatusVM();
-  //   statusUpdate.id = "1";
-  //   statusUpdate.name = "  status1";
-  //   statusUpdate.isEdit = true;
-
-  //   component.update(statusUpdate);
-  //   expect(statusUpdate.isEdit).toEqual(true);
-  // });
- 
 });
