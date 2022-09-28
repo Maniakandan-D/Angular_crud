@@ -153,44 +153,4 @@ describe('AddEditComponent', () => {
     component.getStatus();
     expect(component.status.length).toEqual(1);
   });
-
-  // it('should add employee', () => {
-  //   component.form.setValue({
-  //       empCode:"1234"
-  //   });
-
-  //   let submitted = component.submitForm();
-  //   expect(submitted).toBe(true);
-  // });
-  // it('update Employee', () => {
-  //   var employeeUpdate = new EmployeeVM();
-  //   employeeUpdate.id = "1";
-  //   employeeUpdate.empCode = "1";
-  //   employeeUpdate.name = "emp1";
-  //   employeeUpdate.email = "employee@gmail.com";
-  //   employeeUpdate.designation = "employee";
-  //   employeeUpdate.department = "employees";
-  //   employeeUpdate.date = "10-7-1999";
-  //   employeeUpdate.status = "confirmed";
-  //   employeeUpdate.salary = "100000";
-
-  //   component.updateEmployee(employeeUpdate);
-  //   expect(employeeUpdate).toEqual(false);
-  // });
-//   it("should test back button", () => {
-
-//     spyOn(component, "back")
-
-//     component.isEmployee = true;
-//     fixture.detectChanges(); 
-
-//     let el = fixture.debugElement.query(By.css('#Back'))
-//     el.triggerEventHandler('click', null)
-
-//     fixture.detectChanges()
-
-//     fixture.whenStable().then(() => {
-//         expect(component.back).toHaveBeenCalled();
-//     });
-// });
 });

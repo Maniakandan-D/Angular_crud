@@ -150,19 +150,4 @@ describe('DepartmentComponent', () => {
 
     expect(updateDepartment.isEdit).toEqual(false);
   });
-  // it("should test deleteDepartment method on delete button", () => {
-
-  //   spyOn(component, "deleteDepartment")
-    
-  //   component.deleteDepartment; 
-  //   fixture.detectChanges(); 
-  //   let el = fixture.debugElement.query(By.css('.mx-1'))
-  //   el.triggerEventHandler('click', null)
-  
-  //   fixture.detectChanges()
-  
-  //   fixture.whenStable().then(() => {
-  //       expect(component.deleteDepartment).toHaveBeenCalled();
-  //   });
-  //});
 });
