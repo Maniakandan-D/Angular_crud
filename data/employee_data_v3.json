@@ -24,14 +24,14 @@
       "modifiedOn": "2022-09-23T11:32:51 -06:-30"
     },
     {
-      "id": "632d4c0bd0ec3ad65c9a61fd",
-      "name": "Software Architect",
-      "createdOn": "2022-09-23T11:32:51.z",
-      "modifiedOn": "2022-09-23T11:32:51 -06:-30"
+      "id": "6332804e18ce1fd59e3717b8",
+      "name": "Network Engineer",
+      "createdOn": "2022-09-27T10:17:10.z",
+      "modifiedOn": "2022-09-27T10:17:10 -06:-30"
     },
     {
-      "id": "632d4c0b0a27ba9d9d230701",
-      "name": "Network Engineer",
+      "id": "632d4c0bd0ec3ad65c9a61fd",
+      "name": "Software Architect",
       "createdOn": "2022-09-23T11:32:51.z",
       "modifiedOn": "2022-09-23T11:32:51 -06:-30"
     },
@@ -50,36 +50,34 @@
   ],
   "Departments": [
     {
-      "id": "632d4c0b1c105727a3b3b635",
+      "id": "63327b0f210f2afe3ba1b98f",
       "name": "Software",
-      "createdOn": "2022-09-23T11:32:51.z",
-      "modifiedOn": "2022-09-23T11:32:51 -06:-30",
-      "isEdit": false
+      "createdOn": "2022-09-27T09:54:47.z",
+      "modifiedOn": "2022-09-27T09:54:47 -06:-30"
     },
     {
-      "id": "632d4c0b9d33821d8a7cba07",
-      "name": "IT",
-      "createdOn": "2022-09-23T11:32:51.z",
-      "modifiedOn": "2022-09-23T11:32:51 -06:-30"
-    },
-    {
-      "id": "632d4c0b510d5acf02b5b47f",
+      "id": "63327b0fc53c78e00b321ea3",
       "name": "Network",
-      "createdOn": "2022-09-23T11:32:51.z",
-      "modifiedOn": "2022-09-23T11:32:51 -06:-30",
-      "isEdit": false
+      "createdOn": "2022-09-27T09:54:47.z",
+      "modifiedOn": "2022-09-27T09:54:47 -06:-30"
     },
     {
-      "id": "632d4c0bab655840e5c8eabb",
+      "id": "63327b0fee46a9247b5cddb5",
+      "name": "IT",
+      "createdOn": "2022-09-27T09:54:47.z",
+      "modifiedOn": "2022-09-27T09:54:47 -06:-30"
+    },
+    {
+      "id": "63327b0fc53c78e00b321ea3",
       "name": "Finance",
-      "createdOn": "2022-09-23T11:32:51.z",
-      "modifiedOn": "2022-09-23T11:32:51 -06:-30"
+      "createdOn": "2022-09-27T09:54:47.z",
+      "modifiedOn": "2022-09-27T09:54:47 -06:-30"
     },
     {
-      "id": "632d4c0bea33b12ea9d69d92",
+      "id": "63327b0fdaa6edf369df9393",
       "name": "HR",
-      "createdOn": "2022-09-23T11:32:51.z",
-      "modifiedOn": "2022-09-23T11:32:51 -06:-30"
+      "createdOn": "2022-09-27T09:54:47",
+      "modifiedOn": "2022-09-27T09:54:47 -06:-30"
     }
   ],
   "Employees": [
@@ -2279,8 +2277,8 @@
       "email": "parkkelly@unisure.com",
       "designation": "HR",
       "department": "Software",
-      "status": "Confirmed",
       "date": "2015-08-27",
+      "status": "Confirmed",
       "salary": "$2,747.91"
     },
     {

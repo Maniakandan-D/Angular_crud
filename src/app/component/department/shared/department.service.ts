@@ -26,12 +26,12 @@ export class DepartmentService {
     return this.http.get<Department>(`${this.apiEndpoint}/${id}`);
   }
 
-  getByName(name: string): Observable<Department> {
-    return this.http.get<Department>(`${this.apiEndpoint}/?name=${name}`);
+  getByName(name: string): Observable<Department[]> {
+    return this.http.get<Department[]>(`${this.apiEndpoint}/?name=${name}`);
   }
 
-  update(data: Department): any{
-    return this.http.put(`${this.apiEndpoint}/${data.id}`,data);
+  update(data: Department): Observable<Department>{
+    return this.http.put<Department>(`${this.apiEndpoint}/${data.id}`,data);
   }
 
   delete(id:string): Observable<Department>{

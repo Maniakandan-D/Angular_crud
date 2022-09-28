@@ -26,8 +26,8 @@ export class EmployeeService {
     return this.http.get<Employee>(`${this.apiEndpoint}/${id}`);
    }
 
-   getByCode(code: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiEndpoint}/?empCode=${code}`);
+   getByCode(code: number): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.apiEndpoint}/?empCode=${code}`);
    }
 
    update(id: string ,data: Employee): any{

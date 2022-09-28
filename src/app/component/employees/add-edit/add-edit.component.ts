@@ -43,6 +43,7 @@ export class AddEditComponent implements OnInit {
     salary: ''
   };
 
+  
   constructor(private router: Router, private route: ActivatedRoute, private employeeService: EmployeeService, 
     private notifyService: AlertService, private formBuilder: FormBuilder, private designationService: DesignationService, 
     private departmentService: DepartmentService, private statusService: StatusService) { }
@@ -81,7 +82,7 @@ export class AddEditComponent implements OnInit {
         this.employeeService.getByCode(empCode).
         subscribe((data: any) =>{
           if(data.length > 0){
-            this.notifyService.showWarning("Employee code is already exists");
+            this.notifyService.showWarning(`Employee ${empCode} code is already exists`);
           }
           else{
             this.createEmployee();
@@ -93,11 +94,11 @@ export class AddEditComponent implements OnInit {
     }
   }
 
-  private createEmployee(): boolean{
+   createEmployee(): boolean{
     this.employeeService.add(this.employeeForm)
     .subscribe({
       next: (data: any) =>{
-        this.notifyService.showSuccess("Employee added successfully !!")
+        this.notifyService.showSuccess(`Employee added successfully !!`)
         this.router.navigate(['/employees']);
       },
       error: (err: any) => {
@@ -108,13 +109,13 @@ export class AddEditComponent implements OnInit {
     return true;
   }
 
-  private updateEmployee(): void{
+  updateEmployee(): void{
    this.employeeService.update(this.id, this.employeeForm)
       .pipe(first())
       .subscribe({
           next: (data: any) => {
             console.log(data)
-              this.notifyService.showSuccess("Employee updated successfully..!!");
+              this.notifyService.showSuccess(`Employee updated successfully..!!`);
               this.router.navigate(["/employees"]);
           },
           error: (error: any) => {

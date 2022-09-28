@@ -5,7 +5,7 @@
       <div class="form-group">
         <label for="status">Status</label>
         <div class="input-group">
-          <input type="text" class="form-control" formControlName="status" name="status" [(ngModel)]="myForm.name" [class.is-invalid]="localForm.submitted && form.get('status')?.invalid" autocomplete="off"/>
+          <input type="text" class="form-control" formControlName="name" name="name" [(ngModel)]="myForm.name" [class.is-invalid]="localForm.submitted && form.get('name')?.invalid" autocomplete="off"/>
           <div class="invalid-feedback">
             Status required
           </div>

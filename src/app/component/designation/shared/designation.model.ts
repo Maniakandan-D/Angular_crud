@@ -3,6 +3,7 @@ export class Designation{
     name: string;
   }
 
-export interface Designation {
+  export class DesignationVM  extends Designation{
     checked?: boolean;
+    isEdit?: boolean;
   }

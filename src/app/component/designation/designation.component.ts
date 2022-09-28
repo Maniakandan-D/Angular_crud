@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/shared/alertService/alert.service';
-import { Designation } from './shared/designation.model';
+import { Designation, DesignationVM } from './shared/designation.model';
 import { DesignationService } from './shared/designation.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { DesignationService } from './shared/designation.service';
 
 export class DesignationComponent implements OnInit {
 
-  designationData: Designation[] = [];
+  designationData: DesignationVM[] = [];
   searchText:any;
   totalLength:any;
   page:number = 1;
@@ -32,14 +32,14 @@ export class DesignationComponent implements OnInit {
     });
   }
 
-  deleteDesignation(row : any): void{
+  deleteDesignation(row : Designation): void{
     if (confirm("Are you sure to delete ?")){
         this.designationService.delete(row.id)
         .subscribe(res => { 
         const index: number = this.designationData.indexOf(row);
         if (index !== -1) {
           this.designationData.splice(index, 1)
-          this.notifyService.showSuccess("Designation deleted successfully");
+          this.notifyService.showSuccess(`Designation ${row.name} deleted successfully`);
         }    
         });
     }
@@ -59,24 +59,29 @@ export class DesignationComponent implements OnInit {
   }
 
   deleteMultiDesignation(): void {
+    if (confirm("Are you sure to delete ?")){
     const selectedDesignation= this.designationData.
-    filter(employee => employee.checked).map(row => row.id);
+    filter(employee => employee.checked);
     if(selectedDesignation && selectedDesignation.length > 0) {
-      selectedDesignation.forEach(id => {
-        this.designationService.delete(id)
+      selectedDesignation.forEach(designation => {
+        this.designationService.delete(designation.id)
         .subscribe({
           next:res => {
-            this.notifyService.showSuccess("Designations successfully deleted")
+            const index: number = this.designationData.indexOf(designation);
+            if (index !== -1) {
+              this.designationData.splice(index, 1);
+              this.notifyService.showSuccess(`Designations ${designation.name} deleted successfully`);
+            }
         }, 
           error: err => {
-            this.notifyService.showError("Something went wrong during deleting designation")
+            this.notifyService.showError(`Something went wrong during deleting ${designation.name}`)
           }
         });
       });		
     } else {
         this.notifyService.showWarning("You must select at least one designation")
       }
-        this.getDesignation();
+    }
   }
 
   addDepartment(): void{
@@ -92,13 +97,13 @@ getDesignationId(data: { isEdit: boolean; }): void{
   this.designationData;
 }
 
-update(rowData: any): void{
-  this.designationService.getByName(rowData.designation)
-  .subscribe((data: any)=>{
+update(rowData: DesignationVM): void{
+  this.designationService.getByName(rowData.name.replace(/^\s+|\s+$/gm,''))
+  .subscribe((data: Designation[])=>{
       if(data.length ==0)
         {
           rowData.isEdit = false;
-          this.designationService.update(rowData).subscribe((updatedData: any)=>{});
+          this.designationService.update(rowData).subscribe((updatedData: Designation)=>{});
           this.notifyService.showSuccess("Designation updated successfully")      
         }
         else

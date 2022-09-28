@@ -28,6 +28,9 @@ export class DesignationAddComponent implements OnInit {
 
   submitForm(): boolean{
     var name = this.form.get('name').value;
+    if(!name.trim()){
+      return false;
+    }
     this.designationService.getByName(name).subscribe((data: any)=>{
       if(data.length > 0)
       {
